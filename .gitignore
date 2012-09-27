@@ -2,5 +2,15 @@
 bin
 obj
 
+# User-specific files
+*.suo
+*.user
+
+#ReSharper
+*_ReSharper*
+
+#App specific docs folder
+Docs
+
 # mstest test results
 TestResults
