@@ -25,8 +25,5 @@ The tool will in the current version (1.1) document the following BizTalk artifa
 ## Setup ##
 
 1. Download the latest package at any location on a machine that has BizTalk Server installed.
-2. Run the command line client found in the *Client* folder using the following command.
-	client.exe -–export 
-By default the client will try and find a local BizTalk Configuration database. If you have a setup with separate database server or other specific setting run ''client.exe –help'' to see info on the different options. 
-The command line client will save the set of configuration files to the folder above the folder it executes in, this can be changed using the ''–folder'' parameter when running the client to set the path to any export folder.
+2. Run the command line client found in the *Client* folder using the following command ``client.exe -export``. By default the client will try and find a local BizTalk Configuration database. If you have a setup with separate database server or other specific setting run ''client.exe –help'' to see info on the different options. The command line client will save the set of configuration files to the folder above the folder it executes in, this can be changed using the ``-folder`` parameter when running the client to set the path to any export folder.
 3. Point a IIS stand alone web site, or a application in a exiting web site, to the folder named Web in the package. By default the web application will look for exported documentation files in a folder above the folder it executes in. This can however be changed in the web.config suing the DocumentsFolder appSettings key.
