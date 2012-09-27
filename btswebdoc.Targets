@@ -3,13 +3,14 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Release">
 
   <Import Project="Tools\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
-
+  <UsingTask AssemblyFile="Tools\GitTasks\GitTasks.dll" TaskName="GitTasks.GitVersionTask"/>
+  
   <PropertyGroup>
     <DeployFolder>$(MSBuildProjectDirectory)\Deployed\btswebdoc\</DeployFolder>
-    <SvnTool>$(ProgramFiles)\CollabNet\Subversion Client</SvnTool>
     <BuildType>Release</BuildType>
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>0</MinorVersion>
+    <MinorVersion>1</MinorVersion>
+    
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,9 +27,10 @@
   </Target>
 
   <Target Name="GetVersion">
-    <SvnVersion LocalPath="$(MSBuildProjectDirectory)" ToolPath="$(SvnTool)">
-      <Output TaskParameter="Revision" PropertyName="Revision" />
-    </SvnVersion>
+    <Message Text="$(SolutionDir)" />
+    <GitVersionTask Path="C:\Users\Administrator\Documents\GitHub\btswebdoc">
+      <Output TaskParameter="Id" PropertyName="LastCommit" />
+    </GitVersionTask>
   </Target>  
   
   <Target Name="GenerateAssemblyInfo" DependsOnTargets="GetVersion">
@@ -43,7 +45,8 @@
      CLSCompliant="true"
      Guid="B61E5938-E5AE-11E0-B163-ED314824019B"
      AssemblyVersion="1.0.0.0"
-     AssemblyFileVersion="$(MajorVersion).$(MinorVersion).0.$(Revision)" />
+     AssemblyFileVersion="$(MajorVersion).$(MinorVersion).0.0"
+     AssemblyInformationalVersion="$(MajorVersion).$(MinorVersion).0.$(LastCommit)" />
   </Target>
 
   
@@ -83,7 +86,7 @@
 
     <Zip Files="@(ZipFiles)"
          WorkingDirectory="$(DeployFolder)"
-         ZipFileName="btswebdoc-$(MajorVersion).$(MinorVersion).$(Revision).zip"
+         ZipFileName="btswebdoc-$(MajorVersion).$(MinorVersion).0.$(LastCommit).zip"
          ZipLevel="9" />
   </Target>
 

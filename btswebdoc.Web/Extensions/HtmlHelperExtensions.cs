@@ -15,8 +15,8 @@ namespace btswebdoc.Web.Extensions
 
         public static string Version(this HtmlHelper html)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            return System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
+            var info = Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyInformationalVersionAttribute)) as AssemblyInformationalVersionAttribute;
+            return info == null ? "N/A" : info.InformationalVersion;
         }
 
         public static IHtmlString Breadcrumbs(this HtmlHelper html, IEnumerable<BizTalkBaseObject> breadcrumbs, Manifest manifest)
