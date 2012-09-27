@@ -8,6 +8,7 @@ obj
 
 #ReSharper
 *_ReSharper*
+*.zip
 
 #App specific docs folder
 Docs
