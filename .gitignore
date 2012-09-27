@@ -13,6 +13,7 @@ obj
 #App specific docs folder
 Docs
 Deployed
+*/Properties/AssemblyInfo.cs
 
 # mstest test results
 TestResults

@@ -4,14 +4,7 @@
 
   <Import Project="Tools\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
   <UsingTask AssemblyFile="Tools\GitTasks\GitTasks.dll" TaskName="GitTasks.GitVersionTask"/>
-  
-  <PropertyGroup>
-    <DeployFolder>$(MSBuildProjectDirectory)\Deployed\btswebdoc\</DeployFolder>
-    <BuildType>Release</BuildType>
-    <MajorVersion>1</MajorVersion>
-    <MinorVersion>1</MinorVersion>
-    
-  </PropertyGroup>
+  <Import Project="btswebdoc.Properties" />
 
   <ItemGroup>
     <AssemblyInfoFiles Include="$(MSBuildProjectDirectory)\**\Properties\AssemblyInfo.cs"/>
@@ -27,12 +20,11 @@
   </Target>
 
   <Target Name="GetVersion">
-    <Message Text="$(SolutionDir)" />
-    <GitVersionTask Path="C:\Users\Administrator\Documents\GitHub\btswebdoc">
+    <GitVersionTask Path="$(SolutionDir)">
       <Output TaskParameter="Id" PropertyName="LastCommit" />
     </GitVersionTask>
-  </Target>  
-  
+  </Target>
+
   <Target Name="GenerateAssemblyInfo" DependsOnTargets="GetVersion">
     <AssemblyInfo CodeLanguage="CS"
      OutputFile="%(AssemblyInfoFiles.Identity)"
@@ -49,7 +41,7 @@
      AssemblyInformationalVersion="$(MajorVersion).$(MinorVersion).0.$(LastCommit)" />
   </Target>
 
-  
+
   <Target Name="CompileSolution">
     <MSBuild  Projects="$(MSBuildProjectDirectory)\btswebdoc.sln" Targets="Rebuild" Properties="Configuration=$(BuildType);" />
   </Target>
@@ -62,7 +54,7 @@
     <ItemGroup>
       <BinDeployables Include="btswebdoc.Web\_bin_deployableAssemblies\*.dll" />
     </ItemGroup>
-    
+
     <Copy SourceFiles="@(BinDeployables)" DestinationFolder="$(DeployFolder)\Web\bin\" />
   </Target>
 

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E4F5D5C-A49A-4357-93C0-5A4D6FDA9692}"
 	ProjectSection(SolutionItems) = preProject
+		btswebdoc.Properties = btswebdoc.Properties
 		btswebdoc.Targets = btswebdoc.Targets
 		Deploy.proj = Deploy.proj
-		Todo.txt = Todo.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "btswebdoc.CmdClient", "btswebdoc.CmdClient\btswebdoc.CmdClient.csproj", "{637C2A6C-2AD5-4A87-AFFD-435F1846FA6A}"
