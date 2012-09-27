@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Btswebdoc : " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Btswebdoc</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/riha/btswebdoc">View on GitHub</a>
+
+          <h1 id="project_title">Btswebdoc</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/riha/btswebdoc/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/riha/btswebdoc/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>BizTalk Web Documentor</h1>
+
+<p>BizTalk Web Documentor automates the creation of technical documentation for BizTalk based solutions by extracting configuration data and visualize this data on a web site.</p>
+
+<p>The solution consists of two different tools; a command line based tool that reads BizTalk installations, configurations and persist them to disk. A web application that reads the different versions of the documentation from disk and shows the information on an easy-to-read web page.</p>
+
+<p>The command line tool will read your current installation and configuration, give it a unique version number and persist a set of compressed files to disk. The execution of the command line tool can be done manually or scheduled. This allows showing all available versions of the documentation in the web applicationand makes it possible to easily switch between versions.</p>
+
+<p>The tool will in the current version (1.1) document the following BizTalk artifacts.</p>
+
+<ul>
+<li>Receive ports</li>
+<li>Send ports</li>
+<li>Orchestrations</li>
+<li>Maps</li>
+<li>Schemas</li>
+<li>Pipelines</li>
+<li>Assemblies</li>
+</ul><h2>Requirements</h2>
+
+<ul>
+<li>.NET 4</li>
+<li>IIS 7.5</li>
+<li>BizTalk Server 2006 +</li>
+</ul><h2>Setup</h2>
+
+<ol>
+<li>Download the latest package at any location on a machine that has BizTalk Server installed.</li>
+<li>Run the command line client found in the <em>Client</em> folder using the following command <code>client.exe -export</code>. By default the client will try and find a local BizTalk Configuration database. If you have a setup with separate database server or other specific setting run ''client.exe –help'' to see info on the different options. The command line client will save the set of configuration files to the folder above the folder it executes in, this can be changed using the <code>-folder</code> parameter when running the client to set the path to any export folder.</li>
+<li>Point a IIS stand alone web site, or a application in a exiting web site, to the folder named Web in the package. By default the web application will look for exported documentation files in a folder above the folder it executes in. This can however be changed in the web.config suing the DocumentsFolder appSettings key.</li>
+</ol>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Btswebdoc maintained by <a href="https://github.com/riha">riha</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
