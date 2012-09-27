@@ -1,0 +1,33 @@
+﻿@model ManifestListModel
+<ul class="dropdown-menu">
+    @if (!Model.CurrentManifest.IsDefaultLatest)
+    {
+        <li>
+            @if (Model.Artefact != null)
+            {
+                <a href="@Model.Artefact.Path(null)">Latest</a>
+            }
+            else
+            {<a href="@HttpContext.Current.Request.ApplicationPath">Latest</a>}
+        </li>
+    }
+    @foreach (var manifest in Model.Manifests)
+    {
+        if (Model.CurrentManifest.IsDefaultLatest || Model.CurrentManifest.Version != manifest.Version)
+        {
+        <li>
+            @if (Model.Artefact != null)
+            {
+                <a href="@Model.Artefact.Path(manifest)">@manifest.Name</a>
+            }
+            else
+            {
+                <a href="@Html.GetVersionedHomePath(manifest)">@manifest.Name</a>
+            }
+            @if (!string.IsNullOrEmpty(manifest.Comment))
+            {
+                <div class="tiny-text">@manifest.Comment</div>
+            }</li>
+        }
+    }
+</ul>

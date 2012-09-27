@@ -1,0 +1,69 @@
+﻿@model TransportInfo
+@if (Model != null)
+{
+    <table class="table table-striped table-bordered">
+        <tr>
+            <td>
+                Address
+            </td>
+            <td>@Model.Address
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Type
+            </td>
+            <td>@Model.Type
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ordered Delivery
+            </td>
+            <td>@Model.OrderedDelivery
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Retry Count
+            </td>
+            <td>@Model.RetryCount
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Retry Interval
+            </td>
+            <td>@Model.RetryInterval
+            </td>
+        </tr>
+    </table>
+    if (Model.ServiceWindow.Enabled)
+    {
+        <h4>
+            Service Window</h4>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <td>
+                    Enabled
+                </td>
+                <td>@Model.ServiceWindow.Enabled
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Start Date
+                </td>
+                <td>@Model.ServiceWindow.FromTime
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    End Date
+                </td>
+                <td>@Model.ServiceWindow.ToTime
+                </td>
+            </tr>
+        </table>
+    }
+}

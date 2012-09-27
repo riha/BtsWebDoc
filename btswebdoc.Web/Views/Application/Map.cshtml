@@ -1,0 +1,81 @@
+﻿@model TransformViewModel
+@section ArtifactTitle {<span class="title-prefix">Map:</span> <span class="force-wrap">@Model.Transform.Name</span>}
+@{
+    ViewBag.Title = "Maps";
+    ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
+    this.AddToViewBag(Model);
+}
+@if (!string.IsNullOrEmpty(Model.Transform.Description))
+{
+    <p class="description">@Html.Raw(@Model.Transform.Description)</p>
+}
+<table class="table table-striped table-bordered">
+    <tr>
+        <td>
+            Application
+        </td>
+        <td>
+            <a href="@Model.CurrentApplication.Path(Model.CurrentManifest)">@Model.CurrentApplication.Name</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Parent assembly
+        </td>
+        <td>
+            <a href="@Model.Transform.ParentAssembly.Path(Model.CurrentManifest)">@Model.Transform.ParentAssembly.Name</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Source schema
+        </td>
+        <td>
+            @if (Model.Transform.SourceSchema != null)
+            {
+                <a href="@Model.Transform.SourceSchema.Path(Model.CurrentManifest)">@Model.Transform.SourceSchema.Name</a>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Target schema
+        </td>
+        <td>
+            @if (Model.Transform.TargetSchema != null)
+            {
+                <a href="@Model.Transform.TargetSchema.Path(Model.CurrentManifest)">@Model.Transform.TargetSchema.Name</a>
+            }
+        </td>
+    </tr>
+</table>
+@if (@Model.Transform.ReceivePorts.Count > 0)
+{
+    <h3>
+        Receive ports using the map</h3>
+    <ul>
+        @foreach (var receivePort in @Model.Transform.ReceivePorts)
+        {
+            <li><a href="@receivePort.Path(Model.CurrentManifest)">@receivePort.Name</a></li>
+        }
+    </ul>
+}
+@if (@Model.Transform.SendPorts.Count > 0)
+{
+    <h3>
+        Send ports using the map</h3>
+    <ul>
+        @foreach (var sendPort in @Model.Transform.SendPorts)
+        {
+            <li><a href="@sendPort.Path(Model.CurrentManifest)">@sendPort.Name</a></li>
+        }
+    </ul>
+}
+<h3>
+    Source</h3>
+<div class="section">
+    <a target="_blank" href="@Model.Transform.SourcePath(Model.CurrentManifest)">View source</a>
+</div>
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest, Artefact = Model.Transform })
+}

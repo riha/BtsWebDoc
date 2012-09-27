@@ -1,0 +1,41 @@
+﻿@model PipelineViewModel
+@section ArtifactTitle {<span class="title-prefix">Pipeline:</span> <span class="force-wrap">@Model.Pipeline.Name</span>}
+@{
+    ViewBag.Title = "Pipeline";
+    ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
+    this.AddToViewBag(Model);
+}
+@if (!string.IsNullOrEmpty(Model.Pipeline.Description))
+{
+    <p class="description">@Html.Raw(@Model.Pipeline.Description)</p>
+}
+<table class="table table-striped table-bordered">
+    <tr>
+        <td>
+            Application
+        </td>
+        <td>
+            <a href="@Model.Pipeline.Application.Path(Model.CurrentManifest)">@Model.Pipeline.Application.Name</a>
+        </td>
+    </tr>
+     <tr>
+        <td>
+            Pipeline type
+        </td>
+        <td>
+            @Model.Pipeline.Type
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Parent Assembly
+        </td>
+        <td>
+            <a href="@Model.Pipeline.ParentAssembly.Path(Model.CurrentManifest)">@Model.Pipeline.ParentAssembly.Name</a>
+        </td>
+    </tr>
+</table>
+
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest, Artefact = Model.Pipeline })
+}

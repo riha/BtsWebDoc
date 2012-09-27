@@ -1,0 +1,104 @@
+﻿@model AssemblyViewModel
+@section ArtifactTitle {<span class="title-prefix">Assembly:</span> <span class="force-wrap">@Model.Assembly.Name</span>}
+@{
+    ViewBag.Title = "Assembly";
+    ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
+    this.AddToViewBag(Model);
+}
+@*@if (Model.Assembly.References != null)
+{
+*@ @*<h3>
+    Referenced Assemblies:</h3>*@ @*   <ul>
+        @foreach (var reference in Model.Assembly.References)
+        {
+            <li>@reference</li>
+        }
+    </ul>   *@
+<table class="table table-striped table-bordered">
+    <tr>
+        <td>
+            Full name
+        </td>
+        <td class="force-wrap">
+            @Model.Assembly.QualifiedName
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Version
+        </td>
+        <td>
+            @Model.Assembly.Version
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Culture
+        </td>
+        <td>
+            @Model.Assembly.Culture
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Public key token
+        </td>
+        <td>
+            @Model.Assembly.PublicKeyToken
+        </td>
+    </tr>
+</table>
+@if (Model.Assembly.Orchestrations.Count > 0)
+{
+    <h3>
+        Orchestrations contained in this assembly
+    </h3>
+    
+    <ul>
+        @foreach (var orchestration in Model.Assembly.Orchestrations)
+        {
+            <li><a href="@orchestration.Path(Model.CurrentManifest)">@orchestration.Name</a></li>
+        }
+    </ul>
+
+}
+@if (Model.Assembly.Transforms.Count > 0)
+{
+    <h3>
+        Maps contained in this assembly</h3>
+    
+    <ul>
+        @foreach (var transform in Model.Assembly.Transforms)
+        {
+            <li><a href="@transform.Path(Model.CurrentManifest)">@transform.Name</a></li>
+        }
+    </ul>
+
+}
+@if (Model.Assembly.Schemas.Count > 0)
+{
+    <h3>
+        Schema contained in this assembly</h3>
+    
+    <ul>
+        @foreach (var schema in Model.Assembly.Schemas)
+        {
+            <li><a href="@schema.Path(Model.CurrentManifest)">@schema.Name</a></li>
+        }
+    </ul>
+
+}
+@if (Model.Assembly.Pipelines.Count > 0)
+{
+    <h3>
+        Pipelines contained in this assembly</h3>
+    <ul>
+        @foreach (var pipeline in Model.Assembly.Pipelines)
+        {
+            <li><a href="@pipeline.Path(Model.CurrentManifest)">@pipeline.Name</a></li>
+        }
+    </ul>
+}
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest, Artefact = Model.Assembly })
+}

@@ -1,0 +1,155 @@
+﻿@model SendPortViewModel
+@section ArtifactTitle {<span class="title-prefix">Send port:</span> <span class="force-wrap">@Model.SendPort.Name</span>}
+@{
+    ViewBag.Title = "SendPort";
+    ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
+    this.AddToViewBag(Model);
+}
+@if (!string.IsNullOrEmpty(Model.SendPort.Description))
+{
+    <p class="description">@Html.Raw(@Model.SendPort.Description)</p>
+}
+<table class="table table-striped table-bordered">
+    <tr>
+        <td>
+            Application
+        </td>
+        <td>
+            <a href="@Model.CurrentApplication.Path(Model.CurrentManifest)">@Model.CurrentApplication.Name</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Priority
+        </td>
+        <td>@Model.SendPort.Priority
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tracking Type
+        </td>
+        <td>@Model.SendPort.TrackingType
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Route Failed Message
+        </td>
+        <td>@Model.SendPort.RouteFailedMessage
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Stop Sending On Failure
+        </td>
+        <td>@Model.SendPort.StopSendingOnFailure
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Send Pipeline
+        </td>
+        <td>
+            <a href="@Model.SendPort.SendPipeline.Path(Model.CurrentManifest)">@Model.SendPort.SendPipeline.Name</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Dynamic
+        </td>
+        <td>@Model.SendPort.Dynamic
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Two-way
+        </td>
+        <td>@Model.SendPort.TwoWay
+        </td>
+    </tr>
+</table>
+@if (Model.SendPort.PrimaryTransport != null && !string.IsNullOrEmpty(Model.SendPort.PrimaryTransport.Address))
+{
+    <h3>
+        Primary Transport</h3>
+    @Html.Partial("_TransportInfoControl", Model.SendPort.PrimaryTransport, new ViewDataDictionary())
+}
+@if (Model.SendPort.SecondaryTransport != null && !string.IsNullOrEmpty(Model.SendPort.SecondaryTransport.Address))
+{
+    <h3>
+        Secondary Transport</h3>
+    @Html.Partial("_TransportInfoControl", Model.SendPort.SecondaryTransport, new ViewDataDictionary())
+}
+@if (Model.SendPort.FilterGroups.Count > 0)
+{
+    <h3>
+        Filter groups</h3>
+    for (int i = 0; i < Model.SendPort.FilterGroups.Count; i++)
+    {
+    <table class="table table-striped table-bordered">
+        @if (i < 1)
+        {
+            <tr>
+                <th>
+                    Filter Property
+                </th>
+                <th>
+                    Operator
+                </th>
+                <th>
+                    Value
+                </th>
+            </tr>
+        }
+        @foreach (btswebdoc.Model.Filter filter in Model.SendPort.FilterGroups[i].Filters)
+        {
+            <tr>
+                <td>@filter.Property
+                </td>
+                <td>@filter.FilterOperator
+                </td>
+                <td>@filter.Value
+                </td>
+            </tr>
+        }
+    </table>
+    }
+
+}
+@if (Model.SendPort.OutboundTransforms.Count > 0)
+{
+    <h3>
+        Outbound Maps</h3>
+    <ul>
+        @foreach (var map in Model.SendPort.OutboundTransforms)
+        {
+            <li><a href="@map.Path(Model.CurrentManifest)">@map.Name</a></li>
+    
+        }
+    </ul>
+}
+@if (Model.SendPort.InboundTransforms.Count > 0)
+{
+    <h3>
+        Inbound Maps</h3>
+    <ul>
+        @foreach (var map in Model.SendPort.InboundTransforms) {
+        <li><a href="@map.Path(Model.CurrentManifest)">@map.Name</a></li>
+        }
+    </ul>
+}
+@if (Model.SendPort.BoundOrchestrations.Count > 0)
+{
+    <h3>
+        Orchestrations bound to this port</h3>
+    <ul>
+        @foreach (var orchestration in Model.SendPort.BoundOrchestrations)
+        {
+        <li><a href="@orchestration.Path(Model.CurrentManifest)">@orchestration.Name</a></li>
+        }
+    </ul>
+}
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest, Artefact = Model.SendPort })
+}

@@ -1,0 +1,11 @@
+﻿@model HostViewModel
+@section ArtifactTitle {Model.Host.Name}           
+@{
+    ViewBag.Title = "Index";
+    ViewBag.CurrentMenuItem = Model.Host.Name;
+    this.AddToViewBag(Model);
+}
+Host
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, Artefact = Model.Host })
+}

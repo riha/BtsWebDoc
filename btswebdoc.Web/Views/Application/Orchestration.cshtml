@@ -1,0 +1,117 @@
+﻿@model OrchestrationViewModel
+@section ArtifactTitle {<span class="title-prefix">Orchestration:</span> <span class="force-wrap">@Model.Orchestration.Name</span>}
+@{
+    ViewBag.Title = "Orchestration";
+    ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
+    this.AddToViewBag(Model);
+}
+@if (!string.IsNullOrEmpty(Model.Orchestration.Description))
+{
+    <p class="description">@Html.Raw(Model.Orchestration.Description)</p>
+}
+<table class="table table-striped table-bordered">
+    <tr>
+        <td>
+            Application
+        </td>
+        <td>
+            @if (Model.CurrentApplication != null)
+            {
+                <a href="@Model.CurrentApplication.Path(Model.CurrentManifest)">@Model.CurrentApplication.Name</a>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Parent Assembly
+        </td>
+        <td>
+            @if (Model.Orchestration.ParentAssembly != null)
+            {
+                <a href="@Model.Orchestration.ParentAssembly.Path(Model.CurrentManifest)">@Model.Orchestration.ParentAssembly.Name</a>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Host
+        </td>
+        <td>
+            @if (Model.Orchestration.Host != null)
+            {
+                @Model.Orchestration.Host.Name
+            }
+        </td>
+    </tr>
+</table>
+<h3>
+    Process overview
+</h3>
+<ul class="thumbnails">
+    <li class="span3"><a target="_blank" href="@Model.Orchestration.SourcePath(Model.CurrentManifest)" class="thumbnail">
+        <img src="@Model.Orchestration.ThumbSourcePath(Model.CurrentManifest)" alt="" />
+    </a></li>
+</ul>
+@if (Model.Orchestration.Ports.Cast<OrchestrationPort>().Where(op => op.ReceivePort != null).Count() > 0)
+{
+    <h3>
+        Logical receive ports
+    </h3>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Bound To
+            </th>
+        </tr>
+        @foreach (var port in Model.Orchestration.Ports.Cast<OrchestrationPort>().Where(op => op.ReceivePort != null))
+        {
+            <tr>
+                <td>
+                    @port.ReceivePort.Name
+                </td>
+                <td>
+                    @if (port.ReceivePort != null)
+                    {
+                        <a href="@port.ReceivePort.Path(Model.CurrentManifest)">@port.Name</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+@if (Model.Orchestration.Ports.Cast<OrchestrationPort>().Where(op => op.SendPort != null).Count() > 0)
+{
+    <h3>
+        Logical send ports
+    </h3>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Bound To
+            </th>
+        </tr>
+        @foreach (var port in Model.Orchestration.Ports.Cast<OrchestrationPort>().Where(op => op.SendPort != null))
+        {
+            <tr>
+                <td>
+                    @port.SendPort.Name
+                </td>
+                <td>
+                    @if (port.SendPort != null)
+                    {
+                        <a href="@port.SendPort.Path(Model.CurrentManifest)">@port.SendPort.Name</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest, Artefact = Model.Orchestration })
+}

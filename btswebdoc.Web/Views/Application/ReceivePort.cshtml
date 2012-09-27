@@ -1,0 +1,143 @@
+﻿@model ReceivePortViewModel
+@section ArtifactTitle {<span class="title-prefix">Receive port:</span> <span class="force-wrap">@Model.ReceivePort.Name</span>}
+@{
+    ViewBag.Title = "ReceivePort";
+    ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
+    this.AddToViewBag(Model);
+}
+@if (!string.IsNullOrEmpty(Model.ReceivePort.Description))
+{
+    <p class="description">@Html.Raw(@Model.ReceivePort.Description)</p>
+}
+<table class="table table-striped table-bordered">
+    <tr>
+        <td>
+            Application
+        </td>
+        <td>
+            <a href="@Model.CurrentApplication.Path(Model.CurrentManifest)">@Model.ReceivePort.Application.Name</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Authentication Type
+        </td>
+        <td>
+            @Model.ReceivePort.AuthenticationType
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tracking Type
+        </td>
+        <td>@Model.ReceivePort.TrackingType
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Two-Way
+        </td>
+        <td>
+            @Model.ReceivePort.TwoWay
+        </td>
+    </tr>
+</table>
+@if (Model.ReceivePort.ReceiveLocations.Count > 0)
+{
+    <h3>
+        Receive locations
+    </h3>
+    <table class="table table-striped table-bordered">
+        @foreach (ReceiveLocation receiveLocation in Model.ReceivePort.ReceiveLocations)
+        {
+            <tr>
+                <td>
+                    Name
+                </td>
+                <td>@receiveLocation.Name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Address
+                </td>
+                <td>
+                    @receiveLocation.Address
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Transport Protocol
+                </td>
+                <td>
+                    @receiveLocation.TransportProtocol
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Receive Pipeline
+                </td>
+                <td>
+                    <a href="@receiveLocation.ReceivePipeline.Path(Model.CurrentManifest)">@receiveLocation.ReceivePipeline.Name</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Receive Handler
+                </td>
+                <td>
+                    @*@receiveLocation.ReceiveHandler.Name*@
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Send Pipeline
+                </td>
+                <td>
+                    @if (receiveLocation.SendPipeline != null)
+                    {
+                        <a href="@receiveLocation.SendPipeline.Path(Model.CurrentManifest)">@receiveLocation.SendPipeline.Name</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+@if (Model.ReceivePort.OutboundTransforms.Count > 0)
+{
+    <h3>
+        Outbound Maps</h3>
+    <ul>
+        @foreach (var map in Model.ReceivePort.OutboundTransforms)
+        {
+            <li><a href="@map.Path(Model.CurrentManifest)">@map.Name</a></li>
+        }
+    </ul>
+
+}
+@if (Model.ReceivePort.InboundTransforms.Count > 0)
+{
+    <h3>
+        Inbound Maps</h3>
+    <ul>
+        @foreach (var map in Model.ReceivePort.InboundTransforms)
+        {
+            <li><a href="@map.Path(Model.CurrentManifest)">@map.Name</a></li>
+        }
+    </ul>
+
+}
+@if (Model.ReceivePort.BoundOrchestrations.Count > 0)
+{
+    <h3>
+        Orchestrations bound to this port</h3>
+    <ul>
+        @foreach (var orchestration in Model.ReceivePort.BoundOrchestrations)
+        {
+            <li><a href="@orchestration.Path(Model.CurrentManifest)">@orchestration.Name</a></li>
+        }
+    </ul>
+}
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest, Artefact = Model.ReceivePort })
+}

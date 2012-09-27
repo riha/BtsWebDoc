@@ -1,0 +1,13 @@
+﻿@model HomeViewModel
+@section ArtifactTitle {BizTalk Server Web Documentor}
+@{
+    ViewBag.Title = "Index";
+    this.AddToViewBag(Model);
+}
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest })
+}
+<p>
+    This site was generated using BizTalk Server Web Documentor version @Html.Version()
+    from database server "@Model.CurrentManifest.Server" and database name "@Model.CurrentManifest.Database"
+    on @Model.CurrentManifest.Date.</p>

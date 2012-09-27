@@ -1,0 +1,92 @@
+﻿@model SchemaViewModel
+@section ArtifactTitle {<span class="title-prefix">Schema:</span> <span class="force-wrap">@Model.Schema.Name</span>}
+@{
+    ViewBag.Title = "Schema";
+    ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
+    this.AddToViewBag(Model);
+}
+@if (!string.IsNullOrEmpty(Model.Schema.Description))
+{
+    <p class="description">@Html.Raw(@Model.Schema.Description)</p>
+}
+<table class="table table-striped table-bordered">
+    <tr>
+        <td>
+            Application
+        </td>
+        <td>
+            <a href="@Model.CurrentApplication.Path(Model.CurrentManifest)">@Model.Schema.Application.Name
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Schema Type
+        </td>
+        <td>
+            @Model.Schema.SchemaType
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Parent Assembly
+        </td>
+        <td>
+            <a href="@Model.Schema.ParentAssembly.Path(Model.CurrentManifest)">@Model.Schema.ParentAssembly.Name</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Target Namespace
+        </td>
+        <td>
+            @Model.Schema.TargetNamespace
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Root name
+        </td>
+        <td>
+            @Model.Schema.RootName
+        </td>
+    </tr>
+</table>
+@if (Model.Schema.Properties.Count > 0)
+{
+    if (Model.Schema.SchemaType == SchemaType.Property)
+    { 
+    <h3>
+        Properties</h3>
+    }
+    else
+    { 
+    <h3>
+        Distinguished fields</h3>
+    }
+    <ul>
+        @foreach (var property in Model.Schema.Properties)
+        {
+            <li>@property.Key</li>    
+        }
+    </ul>
+}
+@if (Model.Schema.ReferencedSchemas.Count > 0)
+{
+
+    <h3>
+        Referenced Property Schema</h3>
+    <ul>
+        @foreach (var schema in Model.Schema.ReferencedSchemas)
+        { 
+            <li><a href="@schema.Path(Model.CurrentManifest)">@schema.Name</a></li>
+        }
+    </ul>
+}
+<h3>
+    Source</h3>
+<div class="section">
+    <a target="_blank" href="@Model.Schema.SourcePath(Model.CurrentManifest)">View source</a>
+</div>
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest, Artefact = Model.Schema })
+}

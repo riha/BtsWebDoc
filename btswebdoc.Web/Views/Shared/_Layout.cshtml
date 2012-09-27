@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/custom.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+            $(".force-wrap").each(function (index, item) {
+                var text = $(item).text();
+                var wrappedText = text.replace(/\./g, ".&#8203;").replace(/_/g, "_&#8203;").replace(/\\/g, "/&#8203;");
+                $(this).html(wrappedText);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="brand" href="/">&nbsp;</a>
+            </div>
+        </div>
+    </div>
+    <div class="custom-container">
+        <div class="row">
+            <div class="span3">
+                <h3 style="margin-top:6px;padding-bottom:3px;">@Model.CurrentManifest.Environment</h3>
+                <ul class="nav nav-tabs nav-stacked">
+                    @foreach (BizTalkApplication application in ViewBag.Applications)
+                    {
+                        if (ViewBag.CurrentMenuItem == application.Name)
+                        { 
+                        <li class="active"><a class="force-wrap" href="#">@application.Name</a></li>
+                        }
+                        else
+                        {
+                        <li><a class="force-wrap" href="@application.Path(Model.CurrentManifest as Manifest)">@application.Name</a></li>
+                        }
+                    }
+                </ul>
+                @* 
+                    <h2>Hosts</h2>
+                        <ul>
+                        @foreach (Host host in ViewBag.Hosts)
+                        {
+                            if (ViewBag.CurrentMenuItem == host.Name)
+                            {
+                            <li class="active">@host.Name</li>
+                            }
+                            else
+                            {
+                            <li><a href="@host.Path(ViewBag.Version as string)">@host.Name</a></li>
+                            }
+                        }
+                        </ul>
+                    *@
+            </div>
+            <!--/span-->
+            <div class="span9">
+                <h2>@RenderSection("ArtifactTitle", required: false)</h2>
+                <div class="row">
+                    <div class="span7">
+                        @Html.Breadcrumbs(ViewBag.BreadCrumbs as List<BizTalkBaseObject>, ViewBag.CurrentManifest as Manifest)
+                    </div>
+                    <div class="span2">
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">@Model.CurrentManifest.Name
+                                <span class="caret"></span></a>
+                            @RenderSection("ManifestList", required: false)
+                        </div>
+                    </div>
+                </div>
+                @RenderBody()
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+        <hr />
+        <footer>
+            <p style="float: left;">
+                BizTalk Server Web Documentor</p>
+            <p style="float: right;">@Html.Version()</p>
+        </footer>
+    </div>
+    @*<div id="header-container">
+        <a href="@Html.GetVersionedHomePath(Model.CurrentManifest as Manifest)">
+            <img alt="logo" id="logo" src="@Url.Content("~/Content/logo.png")" /></a></div>
+    <div id="main-container">
+        <div id="menu-container">
+            <h1>@Model.CurrentManifest.Environment</h1>
+            <h2>
+                Applications</h2>
+            <ul>
+                @foreach (BizTalkApplication application in ViewBag.Applications)
+                {
+                    if (ViewBag.CurrentMenuItem == application.Name)
+                    { 
+                    <li class="active">@application.Name</li>
+                    }
+                    else
+                    {
+                    <li><a href="@application.Path(Model.CurrentManifest as Manifest)">@application.Name</a></li>
+                    }
+                }
+            </ul>*@ @* <h2>Hosts</h2>
+            <ul>
+                @foreach (Host host in ViewBag.Hosts)
+                {
+                    if (ViewBag.CurrentMenuItem == host.Name)
+                    {
+                    <li class="active">@host.Name</li>
+                    }
+                    else
+                    {
+                    <li><a href="@host.Path(ViewBag.Version as string)">@host.Name</a></li>
+                    }
+                }
+            </ul>*@ @*  </div>*@ @*<div id="content-container">
+            <div id="content">
+                <div id="title">
+                    <h1>@RenderSection("ArtifactTitle", required: false)</h1>
+                </div>
+                <div id="links-container">
+                    <div id="breadcrumbs">
+                        @Html.Breadcrumbs(ViewBag.BreadCrumbs as List<BizTalkBaseObject>, ViewBag.CurrentManifest as Manifest)
+                    </div>
+                    <div id="manifest">
+                        Version: <a href="#" class="manifest-selector">@Model.CurrentManifest.Name</a>&nbsp;<a
+                            href="#"><img alt="versions" class="manifest-selector" src="@Url.Content("~/Content/dropdown-arrow.png")" /></a>
+                        @RenderSection("ManifestList", required: false)</div>
+                </div>
+                <div id="body">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <div style="clear: both;">
+        </div>
+    </div>
+    <div id="footer-container">
+        <div style="float: left;">
+            BizTalk Server Web Documentor</div>
+        <div style="float: right;">@Html.Version()</div>
+    </div>*@
+</body>
+</html>

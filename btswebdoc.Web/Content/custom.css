@@ -1,0 +1,24 @@
+﻿.title-prefix
+{
+    color: #aaa;
+}
+.table tbody tr:hover td
+{
+    background-color: transparent;
+}
+
+.table-striped tbody tr:nth-child(odd):hover td, .table-striped tbody tr:nth-child(odd) th
+{
+    background-color: #F9F9F9;
+}
+
+.table-bordered tr:hover th, .table-bordered tr:hover td
+{
+    border-left: 1px solid #DDD;
+}
+
+.custom-container {margin:0px 20px 0px 20px;}
+
+.btn {height:19px;padding-top:8px;}
+
+.tiny-text {padding:0px 15px 5px 15px;font-size:12px;margin:0px;font-style:italic;}

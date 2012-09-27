@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Release">
+
+  <Import Project="Tools\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+
+  <PropertyGroup>
+    <DeployFolder>$(MSBuildProjectDirectory)\Deployed\btswebdoc\</DeployFolder>
+    <SvnTool>$(ProgramFiles)\CollabNet\Subversion Client</SvnTool>
+    <BuildType>Release</BuildType>
+    <MajorVersion>1</MajorVersion>
+    <MinorVersion>0</MinorVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyInfoFiles Include="$(MSBuildProjectDirectory)\**\Properties\AssemblyInfo.cs"/>
+  </ItemGroup>
+
+  <Target Name="Release">
+    <CallTarget Targets="Clean;GenerateAssemblyInfo;CompileSolution;Deploy;BuildZip" />
+  </Target>
+
+  <Target Name="Clean">
+    <RemoveDir Directories="$(DeployFolder)/Web" />
+    <RemoveDir Directories="$(DeployFolder)/Client" />
+  </Target>
+
+  <Target Name="GetVersion">
+    <SvnVersion LocalPath="$(MSBuildProjectDirectory)" ToolPath="$(SvnTool)">
+      <Output TaskParameter="Revision" PropertyName="Revision" />
+    </SvnVersion>
+  </Target>  
+  
+  <Target Name="GenerateAssemblyInfo" DependsOnTargets="GetVersion">
+    <AssemblyInfo CodeLanguage="CS"
+     OutputFile="%(AssemblyInfoFiles.Identity)"
+     AssemblyTitle="BizTalk Server Web Documentor"
+     AssemblyDescription="Documentation tool for BizTalk Server"
+     AssemblyCompany=""
+     AssemblyProduct="btswebdoc"
+     AssemblyCopyright="Copyright © Richard Hallgren with friends"
+     ComVisible="false"
+     CLSCompliant="true"
+     Guid="B61E5938-E5AE-11E0-B163-ED314824019B"
+     AssemblyVersion="1.0.0.0"
+     AssemblyFileVersion="$(MajorVersion).$(MinorVersion).0.$(Revision)" />
+  </Target>
+
+  
+  <Target Name="CompileSolution">
+    <MSBuild  Projects="$(MSBuildProjectDirectory)\btswebdoc.sln" Targets="Rebuild" Properties="Configuration=$(BuildType);" />
+  </Target>
+
+  <Target Name="DeployWeb">
+    <MSBuild Projects="btswebdoc.Web\btswebdoc.Web.csproj"
+          Targets="ResolveReferences;_CopyWebApplication"
+          Properties="_ResolveReferenceDependencies=true;Configuration=$(BuildType);WebProjectOutputDir=$(DeployFolder)\Web\;OutDir=$(DeployFolder)\Web\bin\" />
+
+    <ItemGroup>
+      <BinDeployables Include="btswebdoc.Web\_bin_deployableAssemblies\*.dll" />
+    </ItemGroup>
+    
+    <Copy SourceFiles="@(BinDeployables)" DestinationFolder="$(DeployFolder)\Web\bin\" />
+  </Target>
+
+  <Target Name="DeployClient">
+    <ItemGroup>
+      <Binaries Include="btswebdoc.CmdClient\bin\$(BuildType)\**\*.*"  />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(Binaries)" DestinationFolder="$(DeployFolder)\Client" />
+  </Target>
+
+  <Target Name="Deploy">
+    <CallTarget Targets="DeployClient;DeployWeb" />
+  </Target>
+
+  <Target Name="BuildZip" DependsOnTargets="GetVersion">
+    <ItemGroup>
+      <ZipFiles Include="$(DeployFolder)\Client\**\*.*" />
+      <ZipFiles Include="$(DeployFolder)\Web\**\*.*" />
+    </ItemGroup>
+
+    <Zip Files="@(ZipFiles)"
+         WorkingDirectory="$(DeployFolder)"
+         ZipFileName="btswebdoc-$(MajorVersion).$(MinorVersion).$(Revision).zip"
+         ZipLevel="9" />
+  </Target>
+
+</Project>
+

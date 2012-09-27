@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{637C2A6C-2AD5-4A87-AFFD-435F1846FA6A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>btswebdoc.CmdClient</RootNamespace>
+    <AssemblyName>client</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.CommonUI, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.ExplorerOM, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.XLangView, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.XLANGs.BaseTypes, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssetsExporter.cs" />
+    <Compile Include="BizTalkArtifacts.cs" />
+    <Compile Include="ApplicationDataExporter.cs" />
+    <Compile Include="CommandParameters.cs" />
+    <Compile Include="Extensions\ExplorerOmModelExtension.cs" />
+    <Compile Include="BtsCatalogReader.cs" />
+    <Compile Include="ModelTransformers\BizTalkApplicationModelTransformer.cs" />
+    <Compile Include="ModelTransformers\BizTalkAssemblyModelTransformer.cs" />
+    <Compile Include="ModelTransformers\ReceiveHandlerModelTransformer.cs" />
+    <Compile Include="ModelTransformers\ReceiveLocationModelTransformer.cs" />
+    <Compile Include="ModelTransformers\ServiceWindowModelTransformer.cs" />
+    <Compile Include="ModelTransformers\OrchestrationModelTransformer.cs" />
+    <Compile Include="ModelTransformers\OrchestrationPortModelTransformer.cs" />
+    <Compile Include="ModelTransformers\PipelineModelTransformer.cs" />
+    <Compile Include="ModelTransformers\ReceivePortModelTransformer.cs" />
+    <Compile Include="ModelTransformers\SchemaModelTransformer.cs" />
+    <Compile Include="ModelTransformers\SendPortModelTransformer.cs" />
+    <Compile Include="ModelTransformers\TransformModelTransformer.cs" />
+    <Compile Include="ModelTransformers\TransportInfoModelTransformer.cs" />
+    <Compile Include="ModelTransformer.cs" />
+    <Compile Include="OrchestrationOverviewImage.cs" />
+    <Compile Include="OrchViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ModelReferenceSetter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\btswebdoc.Model\btswebdoc.Model.csproj">
+      <Project>{481B6AE4-4F24-4457-AA25-5AF28651CD99}</Project>
+      <Name>btswebdoc.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\btswebdoc.Shared\btswebdoc.Shared.csproj">
+      <Project>{0854E76F-E8F7-4216-B584-27D2648A10BB}</Project>
+      <Name>btswebdoc.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\btswebdoc.Targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.-->
+  <Target Name="BeforeBuild">
+    <!--<CallTarget Targets="GenerateAssemblyInfo" />-->
+  </Target>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!--Target Name="AfterBuild">
+  </Target-->
+</Project>

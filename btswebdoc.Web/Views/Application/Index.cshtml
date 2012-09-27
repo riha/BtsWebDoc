@@ -1,0 +1,122 @@
+﻿@model ApplicationViewModel
+@section ArtifactTitle {<span class="title-prefix">Application:</span> <span class="force-wrap">@Model.CurrentApplication.Name</span>
+}
+@{
+    ViewBag.Title = "Index";
+    ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
+    this.AddToViewBag(Model);
+}
+@if (!string.IsNullOrEmpty(Model.Application.Description))
+{
+    <p class="description">@Html.Raw(@Model.Application.Description)</p>
+}
+@if (Model.Application.ReceivePorts.Count > 0)
+{
+    <h3>
+        Receive ports</h3>
+    
+    foreach (var receivePort in Model.Application.ReceivePorts.Values)
+    { 
+    <p>
+        <a href="@receivePort.Path(Model.CurrentManifest)">@receivePort.Name</a>
+        @receivePort.ShortDescription()
+    </p>
+    }
+
+}
+@if (Model.Application.SendPorts.Count > 0)
+{
+    <h3>
+        Send ports</h3>
+    foreach (var sendPort in Model.Application.SendPorts.Values)
+    {
+    <p>
+        <a href="@sendPort.Path(Model.CurrentManifest)">@sendPort.Name</a>
+        @sendPort.ShortDescription()
+    </p>
+    }
+}
+@if (Model.Application.Orchestrations.Count > 0)
+{
+    <h3>
+        Orchestrations</h3>
+    
+    foreach (var orchestration in Model.Application.Orchestrations.Values)
+    {
+    <p>
+        <a href="@orchestration.Path(Model.CurrentManifest)">@orchestration.Name</a>
+        @orchestration.ShortDescription()
+    </p>
+    }
+
+
+}
+@if (Model.Application.Maps.Count > 0)
+{
+    <h3>
+        Maps</h3>
+    foreach (var transform in Model.Application.Maps.Values)
+    { 
+    <p>
+        <a href="@transform.Path(Model.CurrentManifest)">@transform.Name</a>
+        @transform.ShortDescription()
+    </p>
+    }
+}
+@if (Model.Application.Schemas.Count > 0)
+{
+    <h3>
+        Schemas</h3>
+    foreach (var schema in Model.Application.Schemas.Values)
+    { 
+    <p>
+        <a href="@schema.Path(Model.CurrentManifest)">@schema.Name - @schema.RootName</a>
+        @schema.ShortDescription()
+    </p>
+    }
+}
+@if (Model.Application.Pipelines.Count > 0)
+{
+    <h3>
+        Pipelines</h3>
+    foreach (var pipeline in Model.Application.Pipelines.Values)
+    { 
+    <p>
+        <a href="@pipeline.Path(Model.CurrentManifest)">@pipeline.Name</a>
+        @pipeline.ShortDescription()
+    </p>
+    }
+}
+@if (Model.Application.Assemblies.Count > 0)
+{
+    <h3>
+        Assemblies</h3>
+    foreach (var assembly in Model.Application.Assemblies.Values)
+    {
+    <p>
+        <a href="@assembly.Path(Model.CurrentManifest)">@assembly.Name</a>
+        @assembly.ShortDescription()
+    </p>
+    }
+}
+@if (Model.Application.ReferencedApplications.Count > 0)
+{
+    <h3>
+        Referenced applications</h3>
+    foreach (var application in Model.Application.ReferencedApplications)
+    {
+    <p>
+        <a href="@application.Path(Model.CurrentManifest)">@application.Name</a>
+        @application.ShortDescription()
+    </p>
+    }
+}
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel()
+{
+    Manifests =
+        Model.Manifests,
+    CurrentManifest = Model.CurrentManifest,
+    Artefact = Model.Application
+})
+}
