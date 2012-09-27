@@ -126,7 +126,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="packages.config" />
-    <Content Include="Views\Shared\SpecificError.cshtml" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Deployment.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
@@ -185,16 +184,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <Import Project="..\btswebdoc.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
-  <Import Project="..\btswebdoc.Targets" />
+
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.-->
   <Target Name="BeforeBuild">
-    <!--<CallTarget Targets="GenerateAssemblyInfo" />-->
+    <CallTarget Targets="GenerateAssemblyInfo" />
   </Target>
-  <!--<Target Name="AfterBuild">
-  </Target> -->
+ <!--Target Name="AfterBuild">
+
+  </Target-->
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
   </Target>
@@ -216,5 +217,5 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+<Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
