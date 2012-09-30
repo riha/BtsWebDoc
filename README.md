@@ -1,8 +1,8 @@
-# BizTalk Web Documentor #
+# BizTalk Web Documenter #
 
-BizTalk Web Documentor automates the creation of technical documentation for BizTalk based solutions by extracting configuration data and visualize this data on a web site.
+BizTalk Web Documenter automates the creation of technical documentation for BizTalk based solutions by extracting configuration data and visualize this data on a web site.
 
-Find out more [here](http://riha.github.com/btswebdoc/)
+Find out more [here](http://btswebdoc.com)
 
 ## License ##
 Licensed under the MIT License
