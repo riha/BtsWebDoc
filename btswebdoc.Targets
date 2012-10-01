@@ -28,7 +28,7 @@
   <Target Name="GenerateAssemblyInfo" DependsOnTargets="GetVersion">
     <AssemblyInfo CodeLanguage="CS"
      OutputFile="%(AssemblyInfoFiles.Identity)"
-     AssemblyTitle="BizTalk Server Web Documentor"
+     AssemblyTitle="BizTalk Server Web Documenter"
      AssemblyDescription="Documentation tool for BizTalk Server"
      AssemblyCompany=""
      AssemblyProduct="btswebdoc"

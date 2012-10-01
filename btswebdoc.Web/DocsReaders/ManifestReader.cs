@@ -36,7 +36,7 @@ namespace btswebdoc.Web.DocsReaders
         public static IEnumerable<Manifest> GetAllManifests(string path)
         {
            if(!Directory.Exists(DocsExportFolderManager.GetDocsExportFolderPath(path)))
-               throw new ConfigurationErrorsException(string.Concat("Can not find a folder containing exported documentation at the following location: ", path, Environment.NewLine, "BizTalk Web Documentor will by default look for a folder namned 'Docs' in the applications root folder. This location can however also be overriden  and set to a specific location in the web.config."));
+               throw new ConfigurationErrorsException(string.Concat("Can not find a folder containing exported documentation at the following location: ", path, Environment.NewLine, "BizTalk Web Documenter will by default look for a folder namned 'Docs' in the applications root folder. This location can however also be overriden  and set to a specific location in the web.config."));
 
             var exportDirectories = Directory.GetDirectories(DocsExportFolderManager.GetDocsExportFolderPath(path));
 
