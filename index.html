@@ -60,24 +60,18 @@
                 <li>IIS 7.5</li>
                 <li>BizTalk Server 2006 +</li>
             </ul>
+            <h2>Downloads</h2>
+            <h3>Latest</h3>
+            <p><a href="https://github.com/downloads/riha/btswebdoc/btswebdoc-1.1.0.62182ce959d4d07cea3d095a38d36761b9df3088.zip">Version 1.0 Beta</a></p>
             <h2>Setup</h2>
             <ol>
-                <li>Download the latest package at any location on a machine that has BizTalk Server
-                    installed.</li>
+                <li>Download the latest package and unpack it.</li>
                 <li>Run the command line client found in the <em>Client</em> folder using the following
                     command <code>client.exe -export</code>.
-                    <br />
-                    By default the client will try and find a local BizTalk Configuration database.
-                    If you have a setup with separate database server or other specific setting run
-                    <code>client.exe –help</code> to see info on the different options.
-                    <br />
-                    The command line client will save the set of configuration files to the folder above
-                    the folder it executes in, this can be changed using the <code>-folder</code> parameter
-                    when running the client to set the path to any export folder.</li>
-                <li>Point a IIS stand alone web site, or a application in a exiting web site, to the
-                    folder named Web in the package. By default the web application will look for exported
-                    documentation files in a folder above the folder it executes in. This can however
-                    be changed in the web.config suing the DocumentsFolder appSettings key.</li>
+                    A set of configuration files will be persisted to disk.</li>
+                <li>Point the IIS to the
+                    folder named <em>Web</em> in the unpacked folder structure.</li>
+                <li>Done! :)</li>
             </ol>
         </section>
     </div>
