@@ -41,7 +41,6 @@
      AssemblyInformationalVersion="$(MajorVersion).$(MinorVersion).0.$(LastCommit)" />
   </Target>
 
-
   <Target Name="CompileSolution">
     <MSBuild  Projects="$(MSBuildProjectDirectory)\btswebdoc.sln" Targets="Rebuild" Properties="Configuration=$(BuildType);" />
   </Target>
