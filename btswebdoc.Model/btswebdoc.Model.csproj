@@ -48,6 +48,7 @@
     <Compile Include="BizTalkAssembly.cs" />
     <Compile Include="BizTalkBaseObject.cs" />
     <Compile Include="BizTalkInstallation.cs" />
+    <Compile Include="SendPortGroup.cs" />
     <Compile Include="Manifest.cs" />
     <Compile Include="OrchestrationPort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

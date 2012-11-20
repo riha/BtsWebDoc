@@ -84,6 +84,7 @@ namespace btswebdoc.CmdClient
                                     Schemas = ModelTransformer.TransformSchemas(catalogReader.Schemas),
                                     Transforms = ModelTransformer.TransformTransforms(catalogReader.Transforms),
                                     SendPorts = ModelTransformer.TransformSendPorts(catalogReader.SendPorts),
+                                    SendPortGroups = ModelTransformer.TransformSendPortGroups(catalogReader.SendPortGroups),
                                     ReceivePorts = ModelTransformer.TransformReceivePorts(catalogReader.ReceivePorts),
                                     Assemblies = ModelTransformer.TransformAssemblies(catalogReader.Assemblies),
                                     Orchestrations = ModelTransformer.TransformOrchestrations(catalogReader.Orchestrations),
@@ -93,6 +94,7 @@ namespace btswebdoc.CmdClient
             ModelReferenceSetter.SetSchemaReferences(artifacts, catalogReader.Schemas);
             ModelReferenceSetter.SetReceivePortReferences(artifacts, catalogReader.ReceivePorts);
             ModelReferenceSetter.SetSendPortReferences(artifacts, catalogReader.SendPorts);
+            ModelReferenceSetter.SetSendPortGroupReferences(artifacts, catalogReader.SendPortGroups);
             ModelReferenceSetter.SetAssemblyReferences(artifacts, catalogReader.Assemblies);
             ModelReferenceSetter.SetPipelineReferences(artifacts, catalogReader.Pipelines);
             ModelReferenceSetter.SetTransformReferences(artifacts, catalogReader.Transforms);

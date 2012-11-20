@@ -16,6 +16,8 @@ namespace btswebdoc.Model
 
         public IDictionary<string, SendPort> SendPorts { get; set; }
 
+        public IDictionary<string, SendPortGroup> SendPortGroups { get; set; }
+
         public IDictionary<string, Orchestration> Orchestrations { get; set; }
 
         public IDictionary<string, Schema> Schemas { get; set; }

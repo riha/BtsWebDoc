@@ -15,6 +15,7 @@ namespace btswebdoc.CmdClient
         public IDictionary<string, BizTalkAssembly> Assemblies { get; set; }
         public IDictionary<string, ReceivePort> ReceivePorts { get; set; }
         public IDictionary<string, SendPort> SendPorts { get; set; }
+        public IDictionary<string, SendPortGroup> SendPortGroups { get; set; }
         public IDictionary<string, Transform> Transforms { get; set; }
     }
 }

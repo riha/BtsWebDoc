@@ -46,6 +46,11 @@ namespace btswebdoc.CmdClient.Extensions
             return omSendPort.Name;
         }
 
+        public static string Id(this SendPortGroup omSendPortGroup)
+        {
+            return omSendPortGroup.Name;
+        }
+
         public static string Id(this Transform omTransform)
         {
             return omTransform.FullName;

@@ -15,11 +15,13 @@ namespace btswebdoc.CmdClient
         private IEnumerable<Pipeline> _omPipelines;
         private IEnumerable<ReceivePort> _omReceivePorts;
         private IEnumerable<SendPort> _omSendPorts;
+        private IEnumerable<SendPortGroup> _omSendPortGroups;
         private IEnumerable<Transform> _omTransforms;
         private IEnumerable<Schema> _omSchemas;
         private IEnumerable<BtsAssembly> _omAssemblies;
         private List<BtsOrchestration> _omOrchestrations;
         private readonly HashSet<string> _excludedApplications;
+        
 
         public BtsCatalogReader(string server, string database, HashSet<string> excludedApplications)
         {
@@ -97,6 +99,22 @@ namespace btswebdoc.CmdClient
                 }
 
                 return _omSendPorts;
+            }
+        }
+
+        public IEnumerable<SendPortGroup> SendPortGroups
+        {
+
+            get
+            {
+                if (_omSendPortGroups == null)
+                {
+                    Log.Info("Reads send port groups from BizTalk Configuration DB");
+                    _omSendPortGroups = _catalog.SendPortGroups.Cast<SendPortGroup>().Where(spg => !_excludedApplications.Contains(spg.Application.Name));
+
+                }
+
+                return _omSendPortGroups;
             }
         }
 

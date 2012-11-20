@@ -14,7 +14,7 @@ namespace btswebdoc.CmdClient.ModelTransformers
 
             sendPort.Name = omSendPort.Name;
             sendPort.Description = omSendPort.Description;
-            sendPort.FilterGroups = CreateFilterGroups(omSendPort.Filter);
+            sendPort.FilterGroups = FilterGroupTransformer.CreateFilterGroups(omSendPort.Filter);
             sendPort.Priority = omSendPort.Priority;
             sendPort.TrackingType = omSendPort.Tracking.ToString();
             sendPort.RouteFailedMessage = omSendPort.RouteFailedMessage;
@@ -33,45 +33,6 @@ namespace btswebdoc.CmdClient.ModelTransformers
             }
             
             return sendPort;
-        }
-
-        private static List<FilterGroup> CreateFilterGroups(string filterXml)
-        {
-            var groups = new List<FilterGroup>();
-
-            if (!string.IsNullOrEmpty(filterXml))
-            {
-
-
-                var doc = new XmlDocument();
-                doc.LoadXml(filterXml);
-
-                foreach (XmlNode groupNode in doc.SelectNodes("./Filter/Group"))
-                {
-                    var group = new FilterGroup();
-                    foreach (XmlNode statementNode in groupNode.SelectNodes("./Statement"))
-                    {
-                        var filter = new Filter
-                        {
-                            Property = statementNode.Attributes.GetNamedItem("Property").Value,
-                            FilterOperator = statementNode.Attributes.GetNamedItem("Operator").Value
-                        };
-
-                        XmlNode valueNode = statementNode.Attributes.GetNamedItem("Value");
-
-                        if (valueNode != null)
-                        {
-                            filter.Value = valueNode.Value;
-                        }
-
-                        group.Filters.Add(filter);
-                    }
-
-                    groups.Add(group);
-                }
-            }
-
-            return groups;
         }
 
         internal static void SetReferences(SendPort sendPort, BizTalkArtifacts artifacts, Microsoft.BizTalk.ExplorerOM.SendPort omSendPort)

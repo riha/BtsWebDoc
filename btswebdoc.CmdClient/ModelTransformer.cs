@@ -77,6 +77,28 @@ namespace btswebdoc.CmdClient
             return sendPorts;
         }
 
+        internal static IDictionary<string, SendPortGroup> TransformSendPortGroups(IEnumerable<Microsoft.BizTalk.ExplorerOM.SendPortGroup> omSendPortGroups)
+        {
+            Log.Info("Tranforms send ports to new model");
+
+            var sendPortGroups = new Dictionary<string, SendPortGroup>();
+
+            foreach (var omSendPortGroup in omSendPortGroups)
+            {
+                if (!sendPortGroups.ContainsKey(omSendPortGroup.Id()))
+                {
+                    Log.Debug("Tranform send port group '{0}' into new model", omSendPortGroup.Name);
+                    sendPortGroups.Add(omSendPortGroup.Id(), SendPortGroupModelTransformer.TransformModel(omSendPortGroup));
+                }
+                else
+                {
+                    Log.Warn("Skips send port group '{0}' as it exists in model", omSendPortGroup.Name);
+                }
+            }
+
+            return sendPortGroups;
+        }
+
         internal static IDictionary<string, ReceivePort> TransformReceivePorts(IEnumerable<Microsoft.BizTalk.ExplorerOM.ReceivePort> omReceivePorts)
         {
             Log.Info("Tranforms receive ports in new model");

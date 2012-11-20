@@ -47,6 +47,18 @@ namespace btswebdoc.CmdClient
             }
         }
 
+        internal static void SetSendPortGroupReferences(BizTalkArtifacts artifacts, IEnumerable<Microsoft.BizTalk.ExplorerOM.SendPortGroup> sendPortsGroup)
+        {
+            Log.Info("Sets model references for send ports groups");
+
+            foreach (var omSendPortGroup in sendPortsGroup)
+            {
+                Log.Debug("Sets references for send port group {0}", omSendPortGroup.Name);
+                var sendPortGroup = artifacts.SendPortGroups[omSendPortGroup.Id()];
+                SendPortGroupModelTransformer.SetReferences(sendPortGroup, artifacts, omSendPortGroup);
+            }
+        }
+
         internal static void SetAssemblyReferences(BizTalkArtifacts artifacts, IEnumerable<Microsoft.BizTalk.ExplorerOM.BtsAssembly> omAssemblies)
         {
             Log.Info("Sets model references for assemblies");

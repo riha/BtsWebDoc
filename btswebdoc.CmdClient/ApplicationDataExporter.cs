@@ -83,6 +83,13 @@ namespace btswebdoc.CmdClient
                         application.SendPorts.Add(sendPort.Id, sendPort);
                 }
 
+                foreach (Microsoft.BizTalk.ExplorerOM.SendPortGroup omSendPortGroup in omApplication.SendPortGroups)
+                {
+                    var sendPortGroup = artifacts.SendPortGroups[omSendPortGroup.Id()];
+
+                    if (!application.SendPortGroups.ContainsKey(sendPortGroup.Id))
+                        application.SendPortGroups.Add(sendPortGroup.Id, sendPortGroup);
+                }
 
                 foreach (Microsoft.BizTalk.ExplorerOM.BtsAssembly omAssembly in omApplication.Assemblies)
                 {
