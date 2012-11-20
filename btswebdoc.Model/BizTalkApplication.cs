@@ -36,6 +36,7 @@ namespace btswebdoc.Model
             ReferencedApplications = new List<BizTalkApplication>();
             ReceivePorts = new Dictionary<string, ReceivePort>();
             SendPorts = new Dictionary<string, SendPort>();
+            SendPortGroups = new Dictionary<string, SendPortGroup>();
             Orchestrations = new Dictionary<string, Orchestration>();
             Schemas = new Dictionary<string, Schema>();
             Assemblies = new Dictionary<string, BizTalkAssembly>();
