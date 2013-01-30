@@ -1,0 +1,73 @@
+﻿@model SendPortGroupViewModel
+@section ArtifactTitle {<span class="title-prefix">Send port group:</span> <span class="force-wrap">@Model.SendPortGroup.Name</span>}
+@{
+    ViewBag.Title = "SendPortGroup";
+    ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
+    this.AddToViewBag(Model);
+}
+@if (!string.IsNullOrEmpty(Model.SendPortGroup.Description))
+{
+    <p class="description">@Html.Raw(@Model.SendPortGroup.Description)</p>
+}
+<table class="table table-striped table-bordered">
+    <tr>
+        <td>
+            Application
+        </td>
+        <td>
+            <a href="@Model.CurrentApplication.Path(Model.CurrentManifest)">@Model.CurrentApplication.Name</a>
+        </td>
+    </tr>
+</table>
+
+@if (Model.SendPortGroup.SendPorts.Count > 0)
+{
+    <h3>
+        Send ports connected this port</h3>
+    <ul>
+        @foreach (var sendPort in Model.SendPortGroup.SendPorts)
+        {
+        <li><a href="@sendPort.Path(Model.CurrentManifest)">@sendPort.Name</a></li>
+        }
+    </ul>
+}
+
+@if (Model.SendPortGroup.FilterGroups.Count > 0)
+{
+    <h3>
+        Filter groups</h3>
+    for (int i = 0; i < Model.SendPortGroup.FilterGroups.Count; i++)
+    {
+    <table class="table table-striped table-bordered">
+        @if (i < 1)
+        {
+            <tr>
+                <th>
+                    Filter Property
+                </th>
+                <th>
+                    Operator
+                </th>
+                <th>
+                    Value
+                </th>
+            </tr>
+        }
+        @foreach (btswebdoc.Model.Filter filter in Model.SendPortGroup.FilterGroups[i].Filters)
+        {
+            <tr>
+                <td>@filter.Property
+                </td>
+                <td>@btswebdoc.Model.Filter.FilterOperatorToSign(filter.FilterOperator)
+                </td>
+                <td>@filter.Value
+                </td>
+            </tr>
+        }
+    </table>
+    }
+}
+    
+@section ManifestList {
+    @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest, Artefact = Model.SendPortGroup })
+}

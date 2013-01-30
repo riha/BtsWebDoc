@@ -22,8 +22,9 @@ namespace btswebdoc.CmdClient.ModelTransformers
         internal static void SetReferences(SendPortGroup sendPortGroup, BizTalkArtifacts artifacts, Microsoft.BizTalk.ExplorerOM.SendPortGroup omSendPortGroup)
         {
             sendPortGroup.Application = artifacts.Applications[omSendPortGroup.Application.Id()];
-            //sendPortGroup.SendPorts.AddRange(artifacts.SendPorts.Where(s => s.Key ==  );
-            //sendPortGroup.SendPorts = artifacts.SendPortGroups[omSendPortGroup.Id()];
+
+            var sendPortIds = omSendPortGroup.SendPorts.Cast<Microsoft.BizTalk.ExplorerOM.SendPort>().Select(s => s.Id());
+            sendPortGroup.SendPorts.AddRange(artifacts.SendPorts.Where(t => sendPortIds.Contains(t.Key)).Select(s => s.Value));
         }
     }
 }

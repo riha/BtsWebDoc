@@ -45,6 +45,9 @@ namespace btswebdoc.Web.Extensions
             if (artefact is SendPort)
                 return string.Concat(reuqestPath, versionPrefix, "Application/", artefact.Application.Id, "/SendPort/", artefact.Id);
 
+            if (artefact is SendPortGroup)
+                return string.Concat(reuqestPath, versionPrefix, "Application/", artefact.Application.Id, "/SendPortGroup/", artefact.Id);
+
             if (artefact is Transform)
                 return string.Concat(reuqestPath, versionPrefix, "Application/", artefact.Application.Id, "/Map/", artefact.Id);
 

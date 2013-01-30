@@ -36,6 +36,18 @@
     </p>
     }
 }
+@if (Model.Application.SendPortGroups.Count > 0)
+{
+    <h3>
+        Send port groups</h3>
+    foreach (var sendPortGroup in Model.Application.SendPortGroups.Values)
+    {
+    <p>
+        <a href="@sendPortGroup.Path(Model.CurrentManifest)">@sendPortGroup.Name</a>
+        @sendPortGroup.ShortDescription()
+    </p>
+    }
+}
 @if (Model.Application.Orchestrations.Count > 0)
 {
     <h3>

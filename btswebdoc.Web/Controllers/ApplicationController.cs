@@ -58,6 +58,35 @@ namespace btswebdoc.Web.Controllers
                             });
         }
 
+
+        public ActionResult SendPortGroup(string applicationName, string artifactid, string version)
+        {
+            Manifest manifest = ManifestReader.GetCurrentManifest(version, Request.PhysicalApplicationPath);
+
+            BizTalkInstallation installation = InstallationReader.GetBizTalkInstallation(manifest);
+
+            BizTalkApplication application = installation.Applications[applicationName];
+
+            SendPortGroup sendPortGroup = application.SendPortGroups[artifactid];
+
+            var breadCrumbs = new List<BizTalkBaseObject>
+                                  {
+                                      application,
+                                      sendPortGroup
+                                  };
+
+            return View(new SendPortGroupViewModel
+            {
+                CurrentApplication = application,
+                Applications = installation.Applications.Values,
+                SendPortGroup = sendPortGroup,
+                BreadCrumbs = breadCrumbs,
+                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                CurrentManifest = manifest
+            });
+        }
+
+
         public ActionResult ReceivePort(string applicationName, string artifactid, string version)
         {
             Manifest manifest = ManifestReader.GetCurrentManifest(version, Request.PhysicalApplicationPath);
