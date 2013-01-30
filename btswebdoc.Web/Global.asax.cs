@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using btswebdoc.Shared.Exceptions;
 
 namespace btswebdoc.Web
 {
@@ -14,7 +15,8 @@ namespace btswebdoc.Web
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new HandleErrorAttribute() { ExceptionType = typeof(MissingDocumentationException), View = "MissingDocumentationError" }, 2);
+            filters.Add(new HandleErrorAttribute(), 1);
         }
 
         public static void RegisterRoutes(RouteCollection routes)

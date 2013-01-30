@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/custom.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="error-page">
+    <h2>
+        An error occurred when trying to locate the exported documentation
+    </h2>
+    <p>
+        Looked for documentation in the following location <strong>@Model.Exception.Path</strong>
+    </p>
+    <p>
+        BizTalk Web Documenter will by default look for a folder namned 'Docs' in the applications
+        root folder. This location can however also be overriden and set to a specific location
+        in the web.config.</p>
+</body>
+</html>

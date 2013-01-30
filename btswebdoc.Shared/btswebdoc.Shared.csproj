@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Exceptions\MissingDocumentationException.cs" />
     <Compile Include="Extensions\DirectoryHelper.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />

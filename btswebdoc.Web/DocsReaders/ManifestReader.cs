@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using btswebdoc.Model;
+using btswebdoc.Shared.Exceptions;
 
 namespace btswebdoc.Web.DocsReaders
 {
@@ -15,9 +16,11 @@ namespace btswebdoc.Web.DocsReaders
 
             var manifests = GetAllManifests(applicationRootPath).ToList();
 
-            if (manifests == null || manifests.Count < 1)
-                throw new ConfigurationErrorsException(string.Concat("Can locate a valid manifest file in location: ",
-                                                                     DocsExportFolderManager.GetDocsExportFolderPath(applicationRootPath)));
+            if (manifests.Count < 1)
+            {
+                string path = DocsExportFolderManager.GetDocsExportFolderPath(applicationRootPath);
+                throw new MissingDocumentationException(string.Concat("Error locating documentation in: ", path)) { Path = path };
+            }
 
             if (string.IsNullOrEmpty(version))
             {
@@ -35,8 +38,8 @@ namespace btswebdoc.Web.DocsReaders
 
         public static IEnumerable<Manifest> GetAllManifests(string path)
         {
-           if(!Directory.Exists(DocsExportFolderManager.GetDocsExportFolderPath(path)))
-               throw new ConfigurationErrorsException(string.Concat("Can not find a folder containing exported documentation at the following location: ", path, Environment.NewLine, "BizTalk Web Documenter will by default look for a folder namned 'Docs' in the applications root folder. This location can however also be overriden  and set to a specific location in the web.config."));
+            if (!Directory.Exists(DocsExportFolderManager.GetDocsExportFolderPath(path)))
+                throw new MissingDocumentationException(string.Concat("Error locating documentation in: ", path)) { Path = path };
 
             var exportDirectories = Directory.GetDirectories(DocsExportFolderManager.GetDocsExportFolderPath(path));
 

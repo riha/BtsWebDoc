@@ -1,4 +1,8 @@
-﻿.title-prefix
+﻿.error-page
+{
+    margin: 50px;
+}
+.title-prefix
 {
     color: #aaa;
 }
