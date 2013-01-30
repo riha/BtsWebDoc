@@ -17,8 +17,26 @@
     border-left: 1px solid #DDD;
 }
 
-.custom-container {margin:0px 20px 0px 20px;}
+.active a
+{
+    cursor: pointer !important;
+}
 
-.btn {height:19px;padding-top:8px;}
+.custom-container
+{
+    margin: 0px 20px 0px 20px;
+}
 
-.tiny-text {padding:0px 15px 5px 15px;font-size:12px;margin:0px;font-style:italic;}
+.btn
+{
+    height: 19px;
+    padding-top: 8px;
+}
+
+.tiny-text
+{
+    padding: 0px 15px 5px 15px;
+    font-size: 12px;
+    margin: 0px;
+    font-style: italic;
+}

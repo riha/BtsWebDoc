@@ -35,7 +35,7 @@
                     {
                         if (ViewBag.CurrentMenuItem == application.Name)
                         { 
-                        <li class="active"><a class="force-wrap" href="#">@application.Name</a></li>
+                        <li class="active"><a class="force-wrap" href="@application.Path(Model.CurrentManifest as Manifest)">@application.Name</a></li>
                         }
                         else
                         {
