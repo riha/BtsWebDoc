@@ -9,10 +9,11 @@ namespace btswebdoc.CmdClient.ModelTransformers
         internal static ReceivePort TransforModel(Microsoft.BizTalk.ExplorerOM.ReceivePort omReceivePort)
         {
             var receivePort = new ReceivePort();
-            receivePort.Name = omReceivePort.Name;
 
+            receivePort.Name = omReceivePort.Name;
+            receivePort.TrackingTypes = (TrackingTypes)omReceivePort.Tracking;
             receivePort.Description = omReceivePort.Description;
-            receivePort.AuthenticationType = omReceivePort.Authentication.ToString();
+            receivePort.AuthenticationType = (AuthenticationType)omReceivePort.Authentication;
 
             return receivePort;
         }
@@ -27,7 +28,7 @@ namespace btswebdoc.CmdClient.ModelTransformers
                 var receivePipeline = omReceiveLocation.ReceivePipeline != null ? artifacts.Pipelines[omReceiveLocation.ReceivePipeline.Id()] : null;
                 var sendPipeline = omReceiveLocation.SendPipeline != null ? artifacts.Pipelines[omReceiveLocation.SendPipeline.Id()] : null;
                 ReceiveLocationModelTransformer.SetReferences(receiveLocation, receivePipeline, sendPipeline);
-                
+
                 receivePort.ReceiveLocations.Add(receiveLocation);
             }
 

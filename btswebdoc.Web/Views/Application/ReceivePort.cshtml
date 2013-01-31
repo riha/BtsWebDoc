@@ -23,14 +23,23 @@
             Authentication Type
         </td>
         <td>
-            @Model.ReceivePort.AuthenticationType
+            @Model.ReceivePort.AuthenticationType.Description()
         </td>
     </tr>
     <tr>
         <td>
             Tracking Type
         </td>
-        <td>@Model.ReceivePort.TrackingType
+        <td>
+            @if (Model.ReceivePort.TrackingTypes != 0)
+            {
+                <ul>
+                    @foreach (var description in @Model.ReceivePort.TrackingTypes.Descriptions())
+                    {
+                        <li>@description</li>
+                    }
+                </ul>
+            }
         </td>
     </tr>
     <tr>

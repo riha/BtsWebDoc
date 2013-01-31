@@ -10,9 +10,9 @@ namespace btswebdoc.Model
     {
         public readonly List<Orchestration> BoundOrchestrations;
 
-        public string AuthenticationType { get; set; }
+        public AuthenticationType AuthenticationType { get; set; }
 
-        public int TrackingType { get; set; }
+        public TrackingTypes TrackingTypes { get; set; }
 
         public bool TwoWay { get; set; }
 

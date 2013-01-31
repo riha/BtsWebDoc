@@ -74,12 +74,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DocsReaders\DocsExportFolderManager.cs" />
     <Compile Include="DocsReaders\InstallationReader.cs" />
+    <Compile Include="Extensions\AuthenticationTypeExtension.cs" />
     <Compile Include="Extensions\BizTalkInstallationExtensions.cs" />
     <Compile Include="Extensions\BizTalkBaseObjectExtension.cs" />
     <Compile Include="Extensions\ByteArrayExtension.cs" />
     <Compile Include="Extensions\CacheExtension.cs" />
     <Compile Include="Extensions\BinaryFileResult.cs" />
     <Compile Include="Extensions\OrchestrationExtensions.cs" />
+    <Compile Include="Extensions\TrackingTypesExtensions.cs" />
     <Compile Include="Extensions\TransformExtension.cs" />
     <Compile Include="Extensions\SchemaExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

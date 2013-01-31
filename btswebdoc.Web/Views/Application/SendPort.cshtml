@@ -29,7 +29,16 @@
         <td>
             Tracking Type
         </td>
-        <td>@Model.SendPort.TrackingType
+        <td>
+            @if (Model.SendPort.TrackingTypes != 0)
+            {
+                <ul>
+                    @foreach (var description in @Model.SendPort.TrackingTypes.Descriptions())
+                    {
+                        <li>@description</li>
+                    }
+                </ul>
+            }
         </td>
     </tr>
     <tr>
@@ -134,8 +143,9 @@
     <h3>
         Inbound Maps</h3>
     <ul>
-        @foreach (var map in Model.SendPort.InboundTransforms) {
-        <li><a href="@map.Path(Model.CurrentManifest)">@map.Name</a></li>
+        @foreach (var map in Model.SendPort.InboundTransforms)
+        {
+            <li><a href="@map.Path(Model.CurrentManifest)">@map.Name</a></li>
         }
     </ul>
 }
@@ -146,7 +156,7 @@
     <ul>
         @foreach (var orchestration in Model.SendPort.BoundOrchestrations)
         {
-        <li><a href="@orchestration.Path(Model.CurrentManifest)">@orchestration.Name</a></li>
+            <li><a href="@orchestration.Path(Model.CurrentManifest)">@orchestration.Name</a></li>
         }
     </ul>
 }

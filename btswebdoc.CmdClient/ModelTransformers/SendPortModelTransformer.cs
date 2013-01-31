@@ -10,17 +10,18 @@ namespace btswebdoc.CmdClient.ModelTransformers
     {
         internal static SendPort TransformModel(Microsoft.BizTalk.ExplorerOM.SendPort omSendPort)
         {
-            var sendPort = new SendPort();
-
-            sendPort.Name = omSendPort.Name;
-            sendPort.Description = omSendPort.Description;
-            sendPort.FilterGroups = FilterGroupTransformer.CreateFilterGroups(omSendPort.Filter);
-            sendPort.Priority = omSendPort.Priority;
-            sendPort.TrackingType = omSendPort.Tracking.ToString();
-            sendPort.RouteFailedMessage = omSendPort.RouteFailedMessage;
-            sendPort.StopSendingOnFailure = omSendPort.StopSendingOnFailure;
-            sendPort.Dynamic = omSendPort.IsDynamic;
-            sendPort.TwoWay = omSendPort.IsTwoWay;
+            var sendPort = new SendPort
+                               {
+                                   Name = omSendPort.Name,
+                                   Description = omSendPort.Description,
+                                   FilterGroups = FilterGroupTransformer.CreateFilterGroups(omSendPort.Filter),
+                                   Priority = omSendPort.Priority,
+                                   TrackingTypes = (TrackingTypes)omSendPort.Tracking,
+                                   RouteFailedMessage = omSendPort.RouteFailedMessage,
+                                   StopSendingOnFailure = omSendPort.StopSendingOnFailure,
+                                   Dynamic = omSendPort.IsDynamic,
+                                   TwoWay = omSendPort.IsTwoWay
+                               };
 
             if (omSendPort.PrimaryTransport != null)
             {
@@ -31,7 +32,7 @@ namespace btswebdoc.CmdClient.ModelTransformers
             {
                 sendPort.SecondaryTransport = TransportInfoModelTransformer.TransforModel(omSendPort.SecondaryTransport);
             }
-            
+
             return sendPort;
         }
 

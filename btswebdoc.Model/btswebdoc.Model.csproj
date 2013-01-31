@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationType.cs" />
     <Compile Include="BizTalkApplication.cs" />
     <Compile Include="BizTalkAssembly.cs" />
     <Compile Include="BizTalkBaseObject.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="ReceivePort.cs" />
     <Compile Include="Schema.cs" />
     <Compile Include="SendPort.cs" />
+    <Compile Include="TrackingTypes.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="TransportInfo.cs" />
   </ItemGroup>

@@ -14,7 +14,7 @@ namespace btswebdoc.Model
 
         public int Priority { get; set; }
 
-        public string TrackingType { get; set; }
+        public TrackingTypes TrackingTypes { get; set; }
 
         public bool RouteFailedMessage { get; set; }
 
