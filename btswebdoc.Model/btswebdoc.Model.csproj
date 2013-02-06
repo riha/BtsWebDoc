@@ -49,6 +49,7 @@
     <Compile Include="BizTalkAssembly.cs" />
     <Compile Include="BizTalkBaseObject.cs" />
     <Compile Include="BizTalkInstallation.cs" />
+    <Compile Include="HostType.cs" />
     <Compile Include="SendPortGroup.cs" />
     <Compile Include="Manifest.cs" />
     <Compile Include="OrchestrationPort.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="Host.cs" />
     <Compile Include="Orchestration.cs" />
     <Compile Include="Pipeline.cs" />
-    <Compile Include="ReceiveHandler.cs" />
     <Compile Include="ReceiveLocation.cs" />
     <Compile Include="ReceivePort.cs" />
     <Compile Include="Schema.cs" />

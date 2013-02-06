@@ -76,9 +76,9 @@
     <Compile Include="BtsCatalogReader.cs" />
     <Compile Include="ModelTransformers\BizTalkApplicationModelTransformer.cs" />
     <Compile Include="ModelTransformers\BizTalkAssemblyModelTransformer.cs" />
+    <Compile Include="ModelTransformers\HostModelTransformer.cs" />
     <Compile Include="ModelTransformers\FilterGroupTransformer.cs" />
     <Compile Include="ModelTransformers\SendPortGroupModelTransformer.cs" />
-    <Compile Include="ModelTransformers\ReceiveHandlerModelTransformer.cs" />
     <Compile Include="ModelTransformers\ReceiveLocationModelTransformer.cs" />
     <Compile Include="ModelTransformers\ServiceWindowModelTransformer.cs" />
     <Compile Include="ModelTransformers\OrchestrationModelTransformer.cs" />

@@ -18,6 +18,7 @@ namespace btswebdoc.CmdClient
         private IEnumerable<SendPortGroup> _omSendPortGroups;
         private IEnumerable<Transform> _omTransforms;
         private IEnumerable<Schema> _omSchemas;
+        private IEnumerable<Host> _omHosts;
         private IEnumerable<BtsAssembly> _omAssemblies;
         private List<BtsOrchestration> _omOrchestrations;
         private readonly HashSet<string> _excludedApplications;
@@ -145,6 +146,21 @@ namespace btswebdoc.CmdClient
                 }
 
                 return _omSchemas;
+            }
+        }
+
+        public IEnumerable<Host> Hosts
+        {
+
+            get
+            {
+                if (_omHosts == null)
+                {
+                    Log.Info("Reads hosts from BizTalk Configuration DB");
+                    _omHosts = _catalog.Hosts.Cast<Host>();
+                }
+
+                return _omHosts;
             }
         }
 

@@ -61,6 +61,11 @@ namespace btswebdoc.CmdClient.Extensions
             return omOrchestration.FullName;
         }
 
+        public static string Id(this Host omHost)
+        {
+            return omHost.Name;
+        }
+
         private static FieldInfo _xmlContentField = null;
 
         public static string GetXmlContent(this Schema schema)

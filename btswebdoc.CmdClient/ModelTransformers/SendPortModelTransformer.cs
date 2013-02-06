@@ -40,6 +40,12 @@ namespace btswebdoc.CmdClient.ModelTransformers
         {
             sendPort.Application = artifacts.Applications[omSendPort.Application.Id()];
             sendPort.SendPipeline = artifacts.Pipelines[omSendPort.SendPipeline.Id()];
+            sendPort.PrimaryTransport.Host = artifacts.Hosts[omSendPort.PrimaryTransport.SendHandler.Host.Id()];
+
+            if(omSendPort.SecondaryTransport != null)
+            {
+                sendPort.SecondaryTransport.Host = artifacts.Hosts[omSendPort.PrimaryTransport.SendHandler.Host.Id()];
+            }
 
             if (omSendPort.InboundTransforms != null)
             {

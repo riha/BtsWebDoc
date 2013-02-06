@@ -16,5 +16,7 @@ namespace btswebdoc.Model
         public int RetryInterval { get; set; }
 
         public ServiceWindow ServiceWindow { get; set; }
+
+        public Host Host { get; set; }
     }
 }

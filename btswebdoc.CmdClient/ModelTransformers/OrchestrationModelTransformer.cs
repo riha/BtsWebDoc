@@ -36,10 +36,10 @@ namespace btswebdoc.CmdClient.ModelTransformers
                 orchestration.ParentAssembly = artifacts.Assemblies[omOrchestration.BtsAssembly.Id()];
             }
 
-            //if (omOrchestration.Host != null)
-            //{
-            //    orchestration.Host = new Host().Map(omOrchestration.Host);
-            //}
+            if (omOrchestration.Host != null)
+            {
+                orchestration.Host = artifacts.Hosts[omOrchestration.Host.Id()];
+            }
 
             foreach (var port in orchestration.Ports)
             {

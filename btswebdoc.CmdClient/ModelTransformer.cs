@@ -208,5 +208,21 @@ namespace btswebdoc.CmdClient
 
             return applications;
         }
+
+        internal static IDictionary<string, Host> TransformHosts(IEnumerable<Microsoft.BizTalk.ExplorerOM.Host> omHosts)
+        {
+            Log.Info("Tranforms hosts in new model");
+
+            var hosts = new Dictionary<string, Host>();
+
+            foreach (var omHost in omHosts)
+            {
+                Log.Debug("Tranform host '{0}' into new model", omHost.Name);
+                hosts.Add(omHost.Id(), HostModelTransformer.TransformModel(omHost));
+            }
+
+            return hosts;
+
+        }
     }
 }

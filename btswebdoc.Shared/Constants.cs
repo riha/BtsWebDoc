@@ -8,6 +8,7 @@ namespace btswebdoc.Shared
     public static class Constants
     {
         public const string DocsFolderName = "Docs";
-        //public const string InstallationFileName = "installation.data";
+        public const string ApplicationDataPath = @"Data\Applications";
+        public const string HostDataPath = @"Data\Hosts";
     }
 }

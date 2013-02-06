@@ -113,8 +113,8 @@ namespace btswebdoc.Web.Extensions
             if (artefact is Transform)
                 return "Map: ";
 
-            //if (artefact is Host)
-            //    return "Host: ";
+            if (artefact is Host)
+                return "Host: ";
 
             if (artefact is Orchestration)
                 return "Orchestration: ";

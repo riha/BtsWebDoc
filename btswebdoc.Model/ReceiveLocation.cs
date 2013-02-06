@@ -12,7 +12,7 @@ namespace btswebdoc.Model
 
         public Pipeline ReceivePipeline { get; set; }
 
-        public ReceiveHandler ReceiveHandler { get; set; }
+        public Host Host { get; set; }
 
         public Pipeline SendPipeline { get; set; }
 

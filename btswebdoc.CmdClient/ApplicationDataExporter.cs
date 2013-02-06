@@ -7,6 +7,7 @@ using System.Web;
 using btswebdoc.CmdClient.Extensions;
 
 using btswebdoc.CmdClient.ModelTransformers;
+using btswebdoc.Shared;
 using btswebdoc.Shared.Extensions;
 using btswebdoc.Shared.Logging;
 
@@ -18,12 +19,33 @@ namespace btswebdoc.CmdClient
     internal class ApplicationDataExporter
     {
         private readonly string _exportPath;
-        private readonly string _dataExportPath;
+        private readonly string _applicationDataExportPath;
+        private readonly string _hostDataExportPath;
 
         public ApplicationDataExporter(string exportPath)
         {
             _exportPath = exportPath;
-            _dataExportPath = DirectoryHelper.CreateDirectory(Path.Combine(_exportPath, "Data"));
+            _applicationDataExportPath = DirectoryHelper.CreateDirectory(Path.Combine(_exportPath, Constants.ApplicationDataPath));
+            _hostDataExportPath = DirectoryHelper.CreateDirectory(Path.Combine(_exportPath, Constants.HostDataPath));
+        }
+
+        public void ExportHostData(BizTalkArtifacts artifacts, IEnumerable<Microsoft.BizTalk.ExplorerOM.Host> omHosts)
+        {
+            Log.Info("Sets model references and serializes hosts");
+
+            foreach (var omHost in omHosts)
+            {
+                var host = artifacts.Hosts[omHost.Id()];
+
+                Log.Debug("Serializes Host {0} to disk", host.Id);
+
+                using (var fs = new FileStream(Path.Combine(_hostDataExportPath, host.Id + ".gz"), FileMode.Create))
+                using (var gz = new GZipStream(fs, CompressionMode.Compress))
+                {
+                    new BinaryFormatter().Serialize(gz, host);
+                }
+            }
+
         }
 
         public void ExportApplicationData(BizTalkArtifacts artifacts, IEnumerable<Microsoft.BizTalk.ExplorerOM.Application> omApplications)
@@ -32,10 +54,12 @@ namespace btswebdoc.CmdClient
 
             foreach (var omApplication in omApplications)
             {
+                //First we get the application
                 var application = artifacts.Applications[omApplication.Id()];
 
                 Log.Debug(string.Format("Sets references references for application {0}", application.Name));
 
+                //Then we iterate over references artefact below to add a reference to then in the current application
                 foreach (Microsoft.BizTalk.ExplorerOM.Application omReferencingApplication in omApplication.References)
                 {
                     if (artifacts.Applications.ContainsKey(omReferencingApplication.Id()))
@@ -109,7 +133,7 @@ namespace btswebdoc.CmdClient
 
                 Log.Debug("Serializes Application {0} to disk", application.Id);
 
-                using (var fs = new FileStream(Path.Combine(_dataExportPath, application.Id + ".gz"), FileMode.Create))
+                using (var fs = new FileStream(Path.Combine(_applicationDataExportPath, application.Id + ".gz"), FileMode.Create))
                 using (var gz = new GZipStream(fs, CompressionMode.Compress))
                 {
                     new BinaryFormatter().Serialize(gz, application);

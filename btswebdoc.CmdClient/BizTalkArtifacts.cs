@@ -8,6 +8,7 @@ namespace btswebdoc.CmdClient
 {
     public class BizTalkArtifacts
     {
+        public IDictionary<string, Host> Hosts { get; set; }
         public IDictionary<string, BizTalkApplication> Applications { get; set; }
         public IDictionary<string, Pipeline> Pipelines { get; set; }
         public IDictionary<string, Orchestration> Orchestrations { get; set; }

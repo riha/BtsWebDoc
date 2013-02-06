@@ -72,10 +72,10 @@
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\AssetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HostController.cs" />
     <Compile Include="DocsReaders\DocsExportFolderManager.cs" />
     <Compile Include="DocsReaders\InstallationReader.cs" />
     <Compile Include="Extensions\AuthenticationTypeExtension.cs" />
-    <Compile Include="Extensions\BizTalkInstallationExtensions.cs" />
     <Compile Include="Extensions\BizTalkBaseObjectExtension.cs" />
     <Compile Include="Extensions\ByteArrayExtension.cs" />
     <Compile Include="Extensions\CacheExtension.cs" />
@@ -93,6 +93,8 @@
     <Compile Include="DocsReaders\ManifestReader.cs" />
     <Compile Include="Models\ApplicationViewModel.cs" />
     <Compile Include="Models\ArtifactType.cs" />
+    <Compile Include="Models\ApplicationViewModelBase.cs" />
+    <Compile Include="Models\HostViewModelBase.cs" />
     <Compile Include="Models\SendPortGroupViewModel.cs" />
     <Compile Include="Models\ManifestListModel.cs" />
     <Compile Include="Models\PipelineViewModel.cs" />

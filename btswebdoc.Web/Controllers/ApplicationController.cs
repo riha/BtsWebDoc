@@ -7,7 +7,6 @@ using btswebdoc.Web.Models;
 
 namespace btswebdoc.Web.Controllers
 {
-    //[OutputCache(Duration = int.MaxValue, VaryByParam = "*")]
     public class ApplicationController : Controller
     {
         public ActionResult Index(string artifactid, string version)
@@ -20,15 +19,14 @@ namespace btswebdoc.Web.Controllers
 
             var breadCrumbs = new List<BizTalkBaseObject> { application };
 
-            return View(new ApplicationViewModel
-                            {
-                                Application = application,
-                                Applications = installation.Applications.Values,
-                                CurrentApplication = application,
-                                BreadCrumbs = breadCrumbs,
-                                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
-                                CurrentManifest = manifest
-                            });
+            return View(new ApplicationViewModel(
+                            application,
+                            ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                            manifest,
+                            breadCrumbs,
+                            installation.Applications.Values,
+                            installation.Hosts.Values,
+                            application));
         }
 
         public ActionResult SendPort(string applicationName, string artifactid, string version)
@@ -47,15 +45,14 @@ namespace btswebdoc.Web.Controllers
                                       sendPort
                                   };
 
-            return View(new SendPortViewModel
-                            {
-                                CurrentApplication = application,
-                                Applications = installation.Applications.Values,
-                                SendPort = sendPort,
-                                BreadCrumbs = breadCrumbs,
-                                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
-                                CurrentManifest = manifest
-                            });
+            return View(new SendPortViewModel(
+                application,
+                ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                            manifest,
+                            breadCrumbs,
+                            installation.Applications.Values,
+                            installation.Hosts.Values,
+                            sendPort));
         }
 
 
@@ -75,17 +72,16 @@ namespace btswebdoc.Web.Controllers
                                       sendPortGroup
                                   };
 
-            return View(new SendPortGroupViewModel
-            {
-                CurrentApplication = application,
-                Applications = installation.Applications.Values,
-                SendPortGroup = sendPortGroup,
-                BreadCrumbs = breadCrumbs,
-                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
-                CurrentManifest = manifest
-            });
+            return View(new SendPortGroupViewModel(
+                application,            
+                ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                            manifest,
+                            breadCrumbs,
+                            
+                            installation.Applications.Values,
+                            installation.Hosts.Values,
+                            sendPortGroup));
         }
-
 
         public ActionResult ReceivePort(string applicationName, string artifactid, string version)
         {
@@ -103,15 +99,15 @@ namespace btswebdoc.Web.Controllers
                                       receivePort
                                   };
 
-            return View(new ReceivePortViewModel
-                            {
-                                CurrentApplication = application,
-                                Applications = installation.Applications.Values,
-                                ReceivePort = receivePort,
-                                BreadCrumbs = breadCrumbs,
-                                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
-                                CurrentManifest = manifest
-                            });
+            return View(new ReceivePortViewModel(
+                application,
+                            ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                            manifest,
+                            breadCrumbs,
+                            
+                            installation.Applications.Values,
+                            installation.Hosts.Values,
+                            receivePort));
         }
 
         public ActionResult Orchestration(string applicationName, string artifactid, string version)
@@ -130,15 +126,15 @@ namespace btswebdoc.Web.Controllers
                                       orchestration
                                   };
 
-            return View(new OrchestrationViewModel
-                            {
-                                CurrentApplication = application,
-                                Applications = installation.Applications.Values,
-                                Orchestration = orchestration,
-                                BreadCrumbs = breadCrumbs,
-                                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
-                                CurrentManifest = manifest
-                            });
+            return View(new OrchestrationViewModel(
+                application,
+                            ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                            manifest,
+                            breadCrumbs,
+                            
+                            installation.Applications.Values,
+                            installation.Hosts.Values,
+                            orchestration));
         }
 
         public ActionResult Map(string applicationName, string artifactid, string version)
@@ -157,15 +153,15 @@ namespace btswebdoc.Web.Controllers
                                       transform
                                   };
 
-            return View(new TransformViewModel
-                            {
-                                CurrentApplication = application,
-                                Applications = installation.Applications.Values,
-                                Transform = transform,
-                                BreadCrumbs = breadCrumbs,
-                                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
-                                CurrentManifest = manifest,
-                            });
+            return View(new TransformViewModel(
+                application,
+                            ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                            manifest,
+                            breadCrumbs,
+                            
+                            installation.Applications.Values,
+                            installation.Hosts.Values,
+                            transform));
         }
 
         public ActionResult Schema(string applicationName, string artifactid, string version)
@@ -181,18 +177,18 @@ namespace btswebdoc.Web.Controllers
             var breadCrumbs = new List<BizTalkBaseObject>
                                   {
                                      application,
-                                      schema
+                                     schema
                                   };
 
-            return View(new SchemaViewModel
-                            {
-                                Applications = installation.Applications.Values,
-                                CurrentApplication = application,
-                                Schema = schema,
-                                BreadCrumbs = breadCrumbs,
-                                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
-                                CurrentManifest = manifest
-                            });
+            return View(new SchemaViewModel(
+                application,
+                        ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                        manifest,
+                        breadCrumbs,
+                        
+                        installation.Applications.Values,
+                        installation.Hosts.Values,
+                        schema));
         }
 
 
@@ -212,15 +208,15 @@ namespace btswebdoc.Web.Controllers
                                       pipeline
                                   };
 
-            return View(new PipelineViewModel
-                            {
-                                CurrentApplication = application,
-                                Applications = installation.Applications.Values,
-                                Pipeline = pipeline,
-                                BreadCrumbs = breadCrumbs,
-                                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
-                                CurrentManifest = manifest
-                            });
+            return View(new PipelineViewModel(
+                application,
+                            ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                            manifest,
+                            breadCrumbs,
+                            
+                            installation.Applications.Values,
+                            installation.Hosts.Values,
+                            pipeline));
         }
 
         public ActionResult Assembly(string applicationName, string artifactid, string version)
@@ -239,15 +235,15 @@ namespace btswebdoc.Web.Controllers
                                       assembly
                                   };
 
-            return View(new AssemblyViewModel
-            {
-                CurrentApplication = application,
-                Applications = installation.Applications.Values,
-                Assembly = assembly,
-                BreadCrumbs = breadCrumbs,
-                Manifests = ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
-                CurrentManifest = manifest
-            });
+            return View(new AssemblyViewModel(
+                application,
+                            ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                            manifest,
+                            breadCrumbs,
+                            
+                            installation.Applications.Values,
+                            installation.Hosts.Values,
+                            assembly));
         }
     }
 }

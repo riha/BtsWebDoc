@@ -1,36 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using BizTalkWebDocumenter.Core;
-using BizTalkWebDocumenter.Exporter.Model;
-using BizTalkWebDocumenter.Model;
-using BizTalkWebDocumenter.Web.Extensions;
-using BizTalkWebDocumenter.Web.Models;
+using btswebdoc.Model;
+using btswebdoc.Web.DocsReaders;
+using btswebdoc.Web.Models;
 
-namespace BizTalkWebDocumenter.Web.Controllers
+namespace btswebdoc.Web.Controllers
 {
     public class HostController : Controller
     {
         public ActionResult Index(string artifactid, string version)
         {
-            var exportReader = new ExportReader();
+            Manifest manifest = ManifestReader.GetCurrentManifest(version, Request.PhysicalApplicationPath);
 
-            BizTalkInstallation installation = exportReader.GetBizTalkInstallation(version);
+            BizTalkInstallation installation = InstallationReader.GetBizTalkInstallation(manifest);
 
-            Host host = installation.GetHost(artifactid);
+            Host host = installation.Hosts[artifactid];
 
-            var breadCrumbs = new List<BizTalkBaseObject>
-                                  {
-                                      host
-                                  };
+            var breadCrumbs = new List<BizTalkBaseObject> { host };
 
-            return View(new HostViewModel
-            {
-                Installation = installation,
-                Host = host,
-                BreadCrumbs = breadCrumbs,
-                Manifests = exportReader.GetAvailableManifests(version),
-                Version = version
-            });
+            return View(new HostViewModel(
+                host,
+                ManifestReader.GetAllManifests(Request.PhysicalApplicationPath),
+                manifest,
+                breadCrumbs,
+
+                installation.Applications.Values,
+                installation.Hosts.Values,
+                host));
         }
     }
 }

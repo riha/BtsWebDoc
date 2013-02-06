@@ -51,6 +51,10 @@ namespace btswebdoc.Web.Extensions
             if (artefact is Transform)
                 return string.Concat(reuqestPath, versionPrefix, "Application/", artefact.Application.Id, "/Map/", artefact.Id);
 
+            if (artefact is Host)
+                return string.Concat(reuqestPath, versionPrefix, "Host/", artefact.Id);
+
+
             throw new ApplicationException("Unknown BizTalk type");
         }
 

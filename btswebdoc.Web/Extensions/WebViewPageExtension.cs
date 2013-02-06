@@ -18,7 +18,7 @@ namespace btswebdoc.Web.Extensions
             page.ViewBag.Applications = model.Applications;
             page.ViewBag.Manifests = model.Manifests;
             page.ViewBag.BreadCrumbs = model.BreadCrumbs;
-            //page.ViewBag.Hosts = model.Hosts;
+            page.ViewBag.Hosts = model.Hosts;
         }
     }
 }

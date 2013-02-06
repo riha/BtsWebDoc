@@ -55,8 +55,10 @@ namespace btswebdoc.CmdClient
 
                 DirectoryHelper.CreateDirectory(exportFolderPath);
 
+                //First we create a object graph of our own
                 BizTalkArtifacts artifacts = TransformArtifacts(catalogReader);
 
+                //Secondly we use our object graph to set all refernces and finally serlize it to disk
                 ExportArtifacts(catalogReader, manifest, exportFolderPath, artifacts);
 
                 Log.Info("Completed export of BtsWebDoc documentaion to {0} in {1} sec.", exportFolderPath, sw.Elapsed.TotalSeconds);
@@ -67,6 +69,7 @@ namespace btswebdoc.CmdClient
         {
             var dataExporter = new ApplicationDataExporter(exportFolderPath);
             dataExporter.ExportApplicationData(artifacts, catalogReader.Applications);
+            dataExporter.ExportHostData(artifacts, catalogReader.Hosts);
 
             var assetsExporter = new AssetsExporter(exportFolderPath);
             assetsExporter.ExportMapSources(catalogReader.Transforms);
@@ -80,6 +83,7 @@ namespace btswebdoc.CmdClient
         {
             var artifacts = new BizTalkArtifacts
                                 {
+                                    Hosts = ModelTransformer.TransformHosts(catalogReader.Hosts),
                                     Applications = ModelTransformer.TransformApplications(catalogReader.Applications),
                                     Schemas = ModelTransformer.TransformSchemas(catalogReader.Schemas),
                                     Transforms = ModelTransformer.TransformTransforms(catalogReader.Transforms),
@@ -135,7 +139,7 @@ namespace btswebdoc.CmdClient
             Console.WriteLine(" -database \t Name of the BizTalk Management database.\n\t\t Defaults to \"BizTalkMgmtDb\".");
             Console.WriteLine(" -comment \t Optional comments to be shown togeteher with the \n\t\t current documentaion version.");
             Console.WriteLine(" -environment \t Optional environment name shown (for example 'Test'). \n\t\t Defaults to the name of the BizTalk Group.");
-            Console.WriteLine(" folder \t Path to the folder where the documentaion export should be saved. Default value = \"..\\Docs\\\".");
+            Console.WriteLine(" -folder \t Path to the folder where the documentaion export should be saved. Default value = \"..\\Docs\\\".");
             Console.WriteLine();
             Console.WriteLine(" client.exe -export -server:sqldb123 -database:BizTalkMgmt1");
             Console.WriteLine(" client.exe -export -comment:\"Revision 1234\"");
