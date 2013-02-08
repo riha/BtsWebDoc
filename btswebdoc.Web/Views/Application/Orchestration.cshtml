@@ -39,7 +39,7 @@
         <td>
             @if (Model.Orchestration.Host != null)
             {
-                @Model.Orchestration.Host.Name
+                <a href="@Model.Orchestration.Host.Path(Model.CurrentManifest)">@Model.Orchestration.Host.Name</a>
             }
         </td>
     </tr>

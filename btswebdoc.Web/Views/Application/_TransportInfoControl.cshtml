@@ -1,4 +1,4 @@
-﻿@model TransportInfo
+﻿@model TransportInfoModel
 @if (Model != null)
 {
     <table class="table table-striped table-bordered">
@@ -6,64 +6,73 @@
             <td>
                 Address
             </td>
-            <td>@Model.Address
+            <td>@Model.TransportInfo.Address
             </td>
         </tr>
         <tr>
             <td>
                 Type
             </td>
-            <td>@Model.Type
+            <td>@Model.TransportInfo.Type
             </td>
         </tr>
         <tr>
             <td>
                 Ordered Delivery
             </td>
-            <td>@Model.OrderedDelivery
+            <td>@Model.TransportInfo.OrderedDelivery
             </td>
         </tr>
         <tr>
             <td>
                 Retry Count
             </td>
-            <td>@Model.RetryCount
+            <td>@Model.TransportInfo.RetryCount
             </td>
         </tr>
         <tr>
             <td>
                 Retry Interval
             </td>
-            <td>@Model.RetryInterval
+            <td>@Model.TransportInfo.RetryInterval
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Send handler
+            </td>
+            <td>
+            <a href="@Model.TransportInfo.Host.Path(Model.CurrentManifest)">@Model.TransportInfo.Host.Name</a>
+            
             </td>
         </tr>
     </table>
-    if (Model.ServiceWindow.Enabled)
+    if (Model.TransportInfo.ServiceWindow.Enabled)
     {
-        <h4>
-            Service Window</h4>
-        <table class="table table-striped table-bordered">
-            <tr>
-                <td>
-                    Enabled
-                </td>
-                <td>@Model.ServiceWindow.Enabled
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Start Date
-                </td>
-                <td>@Model.ServiceWindow.FromTime
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    End Date
-                </td>
-                <td>@Model.ServiceWindow.ToTime
-                </td>
-            </tr>
-        </table>
+    <h4>
+        Service Window</h4>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <td>
+                Enabled
+            </td>
+            <td>@Model.TransportInfo.ServiceWindow.Enabled
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Start Date
+            </td>
+            <td>@Model.TransportInfo.ServiceWindow.FromTime
+            </td>
+        </tr>
+        <tr>
+            <td>
+                End Date
+            </td>
+            <td>@Model.TransportInfo.ServiceWindow.ToTime
+            </td>
+        </tr>
+    </table>
     }
 }

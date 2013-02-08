@@ -82,13 +82,13 @@
 {
     <h3>
         Primary Transport</h3>
-    @Html.Partial("_TransportInfoControl", Model.SendPort.PrimaryTransport, new ViewDataDictionary())
+    @Html.Partial("_TransportInfoControl", new TransportInfoModel() { TransportInfo = Model.SendPort.PrimaryTransport, CurrentManifest = Model.CurrentManifest })
 }
 @if (Model.SendPort.SecondaryTransport != null && !string.IsNullOrEmpty(Model.SendPort.SecondaryTransport.Address))
 {
     <h3>
         Secondary Transport</h3>
-    @Html.Partial("_TransportInfoControl", Model.SendPort.SecondaryTransport, new ViewDataDictionary())
+    @Html.Partial("_TransportInfoControl", new TransportInfoModel() { TransportInfo = Model.SendPort.SecondaryTransport, CurrentManifest = Model.CurrentManifest })
 }
 @if (Model.SendPort.FilterGroups.Count > 0)
 {

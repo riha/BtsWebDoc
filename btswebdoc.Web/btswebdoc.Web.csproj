@@ -94,6 +94,7 @@
     <Compile Include="Models\ApplicationViewModel.cs" />
     <Compile Include="Models\ArtifactType.cs" />
     <Compile Include="Models\ApplicationViewModelBase.cs" />
+    <Compile Include="Models\TransportInfoModel.cs" />
     <Compile Include="Models\HostViewModelBase.cs" />
     <Compile Include="Models\SendPortGroupViewModel.cs" />
     <Compile Include="Models\ManifestListModel.cs" />
