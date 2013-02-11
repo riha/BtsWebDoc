@@ -1,4 +1,9 @@
-﻿.error-page
+﻿* {font-size:13px;}
+h2, h2 span {font-size:21px;}
+h3 {font-size:18px;}
+h3 {font-size:15px;margin:0px;}
+.version-selector {min-width:137px;text-align:right;min-height:23px;}
+.error-page
 {
     margin: 50px;
 }

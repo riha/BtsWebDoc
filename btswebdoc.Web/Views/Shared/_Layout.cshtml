@@ -28,7 +28,7 @@
     <div class="custom-container">
         <div class="row">
             <div class="span3">
-                <h3 style="margin-top: 6px; padding-bottom: 3px;">@Model.CurrentManifest.Environment</h3>
+                <h2>@Model.CurrentManifest.Environment</h2>
                 <ul class="nav nav-tabs nav-stacked">
                     @foreach (BizTalkApplication application in ViewBag.Applications)
                     {
@@ -42,7 +42,7 @@
                         }
                     }
                 </ul>
-                <h3 style="margin-top: 6px; padding-bottom: 3px;">Hosts</h3>
+                <h2>Hosts</h2>
                 <ul class="nav nav-tabs nav-stacked">
                     @if (ViewBag.Hosts != null)
                     {
@@ -68,7 +68,7 @@
                     </div>
                     <div class="span2">
                         <div class="btn-group">
-                            <a href="#" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">@Model.CurrentManifest.Name
+                            <a href="#" class="btn btn-inverse dropdown-toggle version-selector" data-toggle="dropdown">@Model.CurrentManifest.Name
                                 <span class="caret"></span></a>
                             @RenderSection("ManifestList", required: false)
                         </div>
