@@ -131,7 +131,7 @@ namespace btswebdoc.CmdClient
         private static void ShowHelp()
         {
             Console.WriteLine();
-            Console.WriteLine(" BizTalk Server Web Documenter, Version " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
+            Console.WriteLine(string.Concat(" ", Constants.ApplicationName, ", Version ", FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion));
             Console.WriteLine();
             Console.WriteLine(" client.exe -export [-server] [-database] [-comment] [-environment] [-exclude]");
             Console.WriteLine();

@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using btswebdoc.Model;
+using btswebdoc.Shared;
 
 namespace btswebdoc.Web.Extensions
 {
@@ -120,6 +121,40 @@ namespace btswebdoc.Web.Extensions
                 return "Orchestration: ";
 
             return string.Empty;
+        }
+
+        public static string PageTitle(this HtmlHelper html, BizTalkBaseObject artefact)
+        {
+            const string title = Constants.ApplicationName;
+
+            if (artefact is BizTalkApplication)
+                return string.Concat(title, " - Application: ", artefact.Name);
+
+            if (artefact is Pipeline)
+                return string.Concat(title, " - Pipeline: ", artefact.Name);
+
+            if (artefact is SendPort)
+                return string.Concat(title, " - Send port: ", artefact.Name);
+
+            if (artefact is ReceivePort)
+                return string.Concat(title, " - Receive port: ", artefact.Name);
+
+            if (artefact is Schema)
+                return string.Concat(title, " - Schema: ", artefact.Name);
+
+            if (artefact is BizTalkAssembly)
+                return string.Concat(title, " - Assembly: ", artefact.Name);
+
+            if (artefact is Transform)
+                return string.Concat(title, " - Map: ", artefact.Name);
+
+            if (artefact is Host)
+                return string.Concat(title, " - Host: ", artefact.Name);
+
+            if (artefact is Orchestration)
+                return string.Concat(title, " - Orchestration: ", artefact.Name);
+
+            return title;
         }
 
     }

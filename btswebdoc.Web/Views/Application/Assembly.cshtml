@@ -1,7 +1,7 @@
 ﻿@model AssemblyViewModel
 @section ArtifactTitle {<span class="title-prefix">Assembly:</span> <span class="force-wrap">@Model.Assembly.Name</span>}
 @{
-    ViewBag.Title = "Assembly";
+    ViewBag.Title = Html.PageTitle(Model.Assembly);
     ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
     this.AddToViewBag(Model);
 }

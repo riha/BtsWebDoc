@@ -1,7 +1,7 @@
 ﻿@model SchemaViewModel
 @section ArtifactTitle {<span class="title-prefix">Schema:</span> <span class="force-wrap">@Model.Schema.Name</span>}
 @{
-    ViewBag.Title = "Schema";
+    ViewBag.Title = Html.PageTitle(Model.Schema);
     ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
     this.AddToViewBag(Model);
 }

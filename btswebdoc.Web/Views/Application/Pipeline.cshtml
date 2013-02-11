@@ -1,7 +1,7 @@
 ﻿@model PipelineViewModel
 @section ArtifactTitle {<span class="title-prefix">Pipeline:</span> <span class="force-wrap">@Model.Pipeline.Name</span>}
 @{
-    ViewBag.Title = "Pipeline";
+    ViewBag.Title = Html.PageTitle(Model.Pipeline);
     ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
     this.AddToViewBag(Model);
 }

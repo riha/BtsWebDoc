@@ -2,7 +2,7 @@
 @section ArtifactTitle {<span class="title-prefix">Application:</span> <span class="force-wrap">@Model.CurrentApplication.Name</span>
 }
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Html.PageTitle(Model.Application);
     ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
     this.AddToViewBag(Model);
 }

@@ -2,7 +2,7 @@
 @section ArtifactTitle {<span class="title-prefix">Send port group:</span> <span
     class="force-wrap">@Model.SendPortGroup.Name</span>}
 @{
-    ViewBag.Title = "SendPortGroup";
+    ViewBag.Title = Html.PageTitle(Model.SendPortGroup);
     ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
     this.AddToViewBag(Model);
 }

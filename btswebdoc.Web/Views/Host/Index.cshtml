@@ -1,7 +1,7 @@
 ﻿@model HostViewModel
 @section ArtifactTitle {Model.Host.Name}
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Html.PageTitle(Model.Host);
     ViewBag.CurrentMenuItem = Model.Host.Name;
     this.AddToViewBag(Model);
 }

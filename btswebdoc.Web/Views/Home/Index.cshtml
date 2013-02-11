@@ -1,7 +1,7 @@
 ﻿@model HomeViewModel
 @section ArtifactTitle {BizTalk Server Web Documenter}
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Html.PageTitle(null);
     this.AddToViewBag(Model);
 }
 @section ManifestList {

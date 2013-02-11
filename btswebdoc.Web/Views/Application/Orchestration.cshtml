@@ -1,7 +1,7 @@
 ﻿@model OrchestrationViewModel
 @section ArtifactTitle {<span class="title-prefix">Orchestration:</span> <span class="force-wrap">@Model.Orchestration.Name</span>}
 @{
-    ViewBag.Title = "Orchestration";
+    ViewBag.Title = Html.PageTitle(Model.Orchestration);
     ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
     this.AddToViewBag(Model);
 }

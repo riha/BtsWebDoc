@@ -1,7 +1,7 @@
 ﻿@model ReceivePortViewModel
 @section ArtifactTitle {<span class="title-prefix">Receive port:</span> <span class="force-wrap">@Model.ReceivePort.Name</span>}
 @{
-    ViewBag.Title = "ReceivePort";
+    ViewBag.Title = Html.PageTitle(Model.ReceivePort);
     ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
     this.AddToViewBag(Model);
 }

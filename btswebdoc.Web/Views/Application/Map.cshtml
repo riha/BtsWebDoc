@@ -1,7 +1,7 @@
 ﻿@model TransformViewModel
 @section ArtifactTitle {<span class="title-prefix">Map:</span> <span class="force-wrap">@Model.Transform.Name</span>}
 @{
-    ViewBag.Title = "Maps";
+    ViewBag.Title = Html.PageTitle(Model.Transform);
     ViewBag.CurrentMenuItem = Model.CurrentApplication.Name;
     this.AddToViewBag(Model);
 }
