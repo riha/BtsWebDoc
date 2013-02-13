@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace btswebdoc.Model
 {
-        [Serializable]
+    [Serializable]
     public class ReceiveLocation : BizTalkBaseObject
     {
         public string Address { get; set; }
@@ -17,6 +17,8 @@ namespace btswebdoc.Model
         public Pipeline SendPipeline { get; set; }
 
         public List<Orchestration> Orchestrations { get; set; }
+
+        public ReceivePort ReceivePort { get; set; }
 
         public override string Id
         {

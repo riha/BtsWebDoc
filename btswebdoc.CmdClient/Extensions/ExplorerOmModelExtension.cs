@@ -13,7 +13,7 @@ namespace btswebdoc.CmdClient.Extensions
     {
         public static string Id(this Schema omSchema)
         {
-            return omSchema.QualifiedName().GetCheckSum(); 
+            return omSchema.QualifiedName().GetCheckSum();
         }
 
         public static string QualifiedName(this Schema omSchema)
@@ -40,6 +40,12 @@ namespace btswebdoc.CmdClient.Extensions
         {
             return omReceivePort.Name;
         }
+
+        public static string Id(this ReceiveLocation omReceiveLocation)
+        {
+            return omReceiveLocation.Name;
+        }
+
 
         public static string Id(this SendPort omSendPort)
         {
@@ -74,7 +80,7 @@ namespace btswebdoc.CmdClient.Extensions
             {
                 // The XmlContent property of Schema caches the retrieved content indefinetely. Due to the huge amount of data stored in XmlContent 
                 // which can never be released we have to resort to this hack of locating the backing store and clearing it after each schema export.
-                var type = typeof (Schema);
+                var type = typeof(Schema);
                 var field = type.GetField("xmlContent", BindingFlags.Instance | BindingFlags.NonPublic);
 
                 if (field == null)
@@ -104,6 +110,21 @@ namespace btswebdoc.CmdClient.Extensions
             field.SetValue(transform, null);
 
             return content;
+        }
+
+        public static Model.HostType Transform(this HostType hostType)
+        {
+            switch (hostType)
+            {
+                case HostType.InProcess:
+                    return Model.HostType.InProcess;
+                case HostType.Invalid:
+                    return Model.HostType.Invalid;
+                case HostType.Isolated:
+                    return Model.HostType.Isolated;
+                default:
+                    throw new ArgumentException("Unknown HostType mapping");
+            }
         }
     }
 }

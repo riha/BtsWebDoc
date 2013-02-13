@@ -107,5 +107,20 @@ namespace btswebdoc.CmdClient
                 PipelineModelTransformer.SetReferences(pipeline, artifacts, omPipeline);
             }
         }
+
+        internal static void SetHostReferences(BizTalkArtifacts artifacts, IEnumerable<Microsoft.BizTalk.ExplorerOM.Host> omHosts, 
+            IEnumerable<Microsoft.BizTalk.ExplorerOM.BtsOrchestration> omOrchestrations,
+            IEnumerable<Microsoft.BizTalk.ExplorerOM.SendPort> omSendPorts,
+            IEnumerable<Microsoft.BizTalk.ExplorerOM.ReceivePort> omReceivePorts)
+        {
+            Log.Info("Sets model references for hosts");
+
+            foreach (var omHost in omHosts)
+            {
+                Log.Debug("Sets references for host {0}", omHost.Name);
+                var host = artifacts.Hosts[omHost.Id()];
+                HostModelTransformer.SetReferences(host, artifacts, omOrchestrations, omSendPorts, omReceivePorts);
+            }
+        }
     }
 }

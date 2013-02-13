@@ -9,3 +9,53 @@ Host
 @section ManifestList {
     @Html.Partial("_ManifestListControl", new ManifestListModel() { Manifests = Model.Manifests, CurrentManifest = Model.CurrentManifest, Artefact = Model.Host })
 }
+<table class="table table-striped table-bordered">
+    <tr>
+        <td>
+            Windows Group
+        </td>
+        <td>
+            @Model.Host.NTGroupName
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Host Type
+        </td>
+        <td>@Model.Host.Type.HostTypeDescription()
+        </td>
+    </tr>
+</table>
+@if (Model.Host.Orchestrations.Count() > 0)
+{
+    <h3>
+        Orchestrations running in this host</h3>
+    <ul>
+        @foreach (var orchestration in Model.Host.Orchestrations) {
+        <li><a href="@orchestration.Path(Model.CurrentManifest)">@orchestration.Name</a></li>
+        }
+    </ul>
+}
+@if (Model.Host.ReceiveLocations.Count() > 0)
+{
+    <h3>
+        Receive locations running in this host</h3>
+    <ul>
+        @foreach (var receiveLocation in Model.Host.ReceiveLocations)
+        {
+            <li><a href="@receiveLocation.Path(Model.CurrentManifest)">@receiveLocation.Name</a></li>
+        }
+    </ul>
+}
+@if (Model.Host.SendPorts.Count() > 0)
+{
+    <h3>
+        Send ports running in this host
+    </h3>
+    <ul>
+        @foreach (var sendPort in Model.Host.SendPorts)
+        {
+            <li><a href="@sendPort.Path(Model.CurrentManifest)">@sendPort.Name</a></li>
+        }
+    </ul>
+}

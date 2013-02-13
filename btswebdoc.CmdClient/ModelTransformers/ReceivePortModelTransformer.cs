@@ -25,6 +25,8 @@ namespace btswebdoc.CmdClient.ModelTransformers
             foreach (Microsoft.BizTalk.ExplorerOM.ReceiveLocation omReceiveLocation in omReceivePort.ReceiveLocations)
             {
                 var receiveLocation = ReceiveLocationModelTransformer.TransforModel(omReceiveLocation);
+
+                receiveLocation.ReceivePort = receivePort;
                 
                 //We simplyfied our model a bit and skipped ReceiveHandler as it doens't add any value
                 receiveLocation.Host = artifacts.Hosts[omReceiveLocation.ReceiveHandler.Host.Id()];

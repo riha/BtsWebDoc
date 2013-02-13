@@ -39,6 +39,13 @@ namespace btswebdoc.Web.Extensions
             if (artefact is ReceivePort)
                 return string.Concat(reuqestPath, versionPrefix, "Application/", artefact.Application.Id, "/ReceivePort/", artefact.Id);
 
+            //Here we need to actually go to the receive port that contains the location as location doesn't have their own page
+            if (artefact is ReceiveLocation)
+            {
+                var rp = ((ReceiveLocation) artefact).ReceivePort;
+                return string.Concat(reuqestPath, versionPrefix, "Application/", rp.Application.Id, "/ReceivePort/", rp.Id);
+            }
+
             if (artefact is Schema)
                 return string.Concat(reuqestPath, versionPrefix, "Application/", artefact.Application.Id, "/Schema/", artefact.Id, "/", artefact.Name);
 

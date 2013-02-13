@@ -103,6 +103,8 @@ namespace btswebdoc.CmdClient
             ModelReferenceSetter.SetPipelineReferences(artifacts, catalogReader.Pipelines);
             ModelReferenceSetter.SetTransformReferences(artifacts, catalogReader.Transforms);
             ModelReferenceSetter.SetOrchestrationReferences(artifacts, catalogReader.Orchestrations);
+            ModelReferenceSetter.SetHostReferences(artifacts, catalogReader.Hosts, catalogReader.Orchestrations, catalogReader.SendPorts, catalogReader.ReceivePorts);
+            
 
             return artifacts;
         }

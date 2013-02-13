@@ -80,6 +80,7 @@
     <Compile Include="Extensions\ByteArrayExtension.cs" />
     <Compile Include="Extensions\CacheExtension.cs" />
     <Compile Include="Extensions\BinaryFileResult.cs" />
+    <Compile Include="Extensions\HostTypesExtensions.cs" />
     <Compile Include="Extensions\OrchestrationExtensions.cs" />
     <Compile Include="Extensions\TrackingTypesExtensions.cs" />
     <Compile Include="Extensions\TransformExtension.cs" />
@@ -214,7 +215,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52940</DevelopmentServerPort>
+          <DevelopmentServerPort>32697</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:49318/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

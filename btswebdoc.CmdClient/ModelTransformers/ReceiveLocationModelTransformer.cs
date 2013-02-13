@@ -7,7 +7,7 @@ namespace btswebdoc.CmdClient.ModelTransformers
         internal static ReceiveLocation TransforModel(Microsoft.BizTalk.ExplorerOM.ReceiveLocation omReceiveLocation)
         {
             var receiveLocation = new ReceiveLocation();
-
+            
             receiveLocation.Name = omReceiveLocation.Name;
             receiveLocation.Address = omReceiveLocation.Address;
             receiveLocation.TransportProtocol = omReceiveLocation.TransportType.Name;

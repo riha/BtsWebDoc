@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using btswebdoc.CmdClient.Extensions;
 using btswebdoc.Model;
 
@@ -12,34 +13,39 @@ namespace btswebdoc.CmdClient.ModelTransformers
 
             host.Name = omHost.Name;
             host.NTGroupName = omHost.NTGroupName;
-            host.Type = (HostType)omHost.Type;
+            host.Type = omHost.Type.Transform();
+            
             return host;
         }
+        internal static void SetReferences(Host host, BizTalkArtifacts artifacts,
+            IEnumerable<Microsoft.BizTalk.ExplorerOM.BtsOrchestration> omOrchestrations,
+            IEnumerable<Microsoft.BizTalk.ExplorerOM.SendPort> omSendPorts,
+            IEnumerable<Microsoft.BizTalk.ExplorerOM.ReceivePort> omReceivePorts)
+        {
+            foreach (var omOrchestration in omOrchestrations.Where(o => o.Host.Id() == host.Id))
+            {
+                host.Orchestrations.Add(artifacts.Orchestrations[omOrchestration.Id()]);
+            }
 
-        //internal static void SetReferences(Transform transform, BizTalkArtifacts artifacts, Microsoft.BizTalk.ExplorerOM.Transform omTransform)
-        //{
-        //    transform.Application = artifacts.Applications[omTransform.Application.Id()];
-        //    transform.ParentAssembly = artifacts.Assemblies[omTransform.BtsAssembly.Id()];
+            foreach (var omSendPort in omSendPorts.Where(sp => sp.PrimaryTransport.SendHandler.Host.Id() == host.Id || (sp.SecondaryTransport.SendHandler != null && sp.SecondaryTransport.SendHandler.Host.Id() == host.Id)))
+            {
+                host.SendPorts.Add(artifacts.SendPorts[omSendPort.Id()]);
+            }
 
-        //    //As it's possible to exclude application we don't always have all schemas. Only add source schema if we have.
-        //    if (artifacts.Schemas.ContainsKey(omTransform.SourceSchema.Id()))
-        //    {
-        //        transform.SourceSchema = artifacts.Schemas[omTransform.SourceSchema.Id()]; ;
-        //    }
+            foreach (var omReceivePort in omReceivePorts)
+            {
+                var omReceiveLocations = omReceivePort.ReceiveLocations.Cast<Microsoft.BizTalk.ExplorerOM.ReceiveLocation>();
 
-        //    //As it's possible to exclude application we don't always have all schemas. Only add target schema if we have.
-        //    if (artifacts.Schemas.ContainsKey(omTransform.TargetSchema.Id()))
-        //    {
-        //        transform.TargetSchema = artifacts.Schemas[omTransform.TargetSchema.Id()];
-        //    }
+                foreach (var omReceiveLocation in omReceiveLocations.Where(rp => rp.ReceiveHandler.Host.Id() == host.Id))
+                {
+                    var rp = artifacts.ReceivePorts[omReceiveLocation.ReceivePort.Id()];
+                    host.ReceiveLocations.AddRange(rp.ReceiveLocations.Where(rl => rl.Id == omReceiveLocation.Id()));
+                }
+            }
 
-        //    transform.ReceivePorts.AddRange(
-        //        artifacts.ReceivePorts.Where(rp => rp.Value.InboundTransforms.Select(t => t.Id).Contains(transform.Id)).Select(
-        //            rp => rp.Value));
 
-        //    transform.SendPorts.AddRange(
-        //    artifacts.SendPorts.Where(rp => rp.Value.OutboundTransforms.Select(t => t.Id).Contains(transform.Id)).Select(
-        //        rp => rp.Value));
-        //}
+            //Serviice instances
+
+        }
     }
 }
