@@ -38,7 +38,7 @@
      Guid="B61E5938-E5AE-11E0-B163-ED314824019B"
      AssemblyVersion="1.0.0.0"
      AssemblyFileVersion="$(MajorVersion).$(MinorVersion).0.0"
-     AssemblyInformationalVersion="$(MajorVersion).$(MinorVersion).0.$(LastCommit)" />
+     AssemblyInformationalVersion="$(MajorVersion).$(MinorVersion).0.0" />
   </Target>
 
   <Target Name="CompileSolution">
