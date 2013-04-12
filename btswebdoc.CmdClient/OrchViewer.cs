@@ -48,7 +48,7 @@ namespace btswebdoc.CmdClient
         }
     }
 
-  
+
     public class SelectionArea
     {
         public int X;
@@ -152,24 +152,24 @@ namespace btswebdoc.CmdClient
 
                 if (w > maxWidth)
                 {
-                    scaleX = maxWidth/(float) w;
+                    scaleX = maxWidth / (float)w;
                     scaleY = scaleX;
                     w = maxWidth;
                     h = (int)Math.Floor(h * scaleY);
                 }
 
-                if(h > maxHeight)
+                if (h > maxHeight)
                 {
-                    scaleY *= maxWidth/(float)h;
+                    scaleY *= maxWidth / (float)h;
                     scaleX *= scaleY;
                     h = maxHeight;
-                    w = (int) Math.Floor(w*scaleX);
+                    w = (int)Math.Floor(w * scaleX);
                 }
 
                 var realBmp = new Bitmap(w, h);
                 var realGraphic = Graphics.FromImage(realBmp);
                 realGraphic.ScaleTransform(scaleX, scaleY);
-                
+
                 realGraphic.SmoothingMode = SmoothingMode.AntiAlias;
                 realGraphic.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
@@ -248,8 +248,10 @@ namespace btswebdoc.CmdClient
 
                         if (os != null)
                         {
-                            orchestration.ShapeMap.Add(os);
-
+                            if (orchestration.ShapeMap != null)
+                            {
+                                orchestration.ShapeMap.Add(os);
+                            }
                             //if (drawHotspots)
                             //{
                             //    DrawDebugRect(g, os.SelectionArea.GetRectangle());
@@ -274,7 +276,7 @@ namespace btswebdoc.CmdClient
 
             if (data != null)
             {
-                os = new OrchShape {Text = bc.Text, Id = data.ShapeID};
+                os = new OrchShape { Text = bc.Text, Id = data.ShapeID };
 
                 var selRect = new Rectangle(
                     bc.DesignSurfaceClientLocation.X - 5,
@@ -366,6 +368,6 @@ namespace btswebdoc.CmdClient
             return;
         }
 
-        
+
     }
 }

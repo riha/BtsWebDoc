@@ -27,7 +27,7 @@ namespace btswebdoc.CmdClient.ModelTransformers
                 host.Orchestrations.Add(artifacts.Orchestrations[omOrchestration.Id()]);
             }
 
-            foreach (var omSendPort in omSendPorts.Where(sp => sp.PrimaryTransport.SendHandler.Host.Id() == host.Id || (sp.SecondaryTransport.SendHandler != null && sp.SecondaryTransport.SendHandler.Host.Id() == host.Id)))
+            foreach (var omSendPort in omSendPorts.Where(sp => (sp.PrimaryTransport != null && sp.PrimaryTransport.SendHandler.Host.Id() == host.Id) || (sp.SecondaryTransport != null && sp.SecondaryTransport.SendHandler != null && sp.SecondaryTransport.SendHandler.Host.Id() == host.Id)))
             {
                 host.SendPorts.Add(artifacts.SendPorts[omSendPort.Id()]);
             }
