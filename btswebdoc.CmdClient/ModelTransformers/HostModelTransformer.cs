@@ -14,7 +14,7 @@ namespace btswebdoc.CmdClient.ModelTransformers
             host.Name = omHost.Name;
             host.NTGroupName = omHost.NTGroupName;
             host.Type = omHost.Type.Transform();
-            
+
             return host;
         }
         internal static void SetReferences(Host host, BizTalkArtifacts artifacts,
@@ -22,7 +22,8 @@ namespace btswebdoc.CmdClient.ModelTransformers
             IEnumerable<Microsoft.BizTalk.ExplorerOM.SendPort> omSendPorts,
             IEnumerable<Microsoft.BizTalk.ExplorerOM.ReceivePort> omReceivePorts)
         {
-            foreach (var omOrchestration in omOrchestrations.Where(o => o.Host.Id() == host.Id))
+            // Adding a null check for host as newly deployed orchestration has no host
+            foreach (var omOrchestration in omOrchestrations.Where(o => o.Host != null && o.Host.Id() == host.Id))
             {
                 host.Orchestrations.Add(artifacts.Orchestrations[omOrchestration.Id()]);
             }
@@ -42,10 +43,6 @@ namespace btswebdoc.CmdClient.ModelTransformers
                     host.ReceiveLocations.AddRange(rp.ReceiveLocations.Where(rl => rl.Id == omReceiveLocation.Id()));
                 }
             }
-
-
-            //Serviice instances
-
         }
     }
 }

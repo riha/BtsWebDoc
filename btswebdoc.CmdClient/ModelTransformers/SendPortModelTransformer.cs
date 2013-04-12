@@ -47,9 +47,9 @@ namespace btswebdoc.CmdClient.ModelTransformers
                 sendPort.PrimaryTransport.Host = artifacts.Hosts[omSendPort.PrimaryTransport.SendHandler.Host.Id()];
             }
 
-            if (omSendPort.SecondaryTransport != null)
+            if (omSendPort.SecondaryTransport != null && omSendPort.SecondaryTransport.SendHandler != null)
             {
-                sendPort.SecondaryTransport.Host = artifacts.Hosts[omSendPort.PrimaryTransport.SendHandler.Host.Id()];
+                sendPort.SecondaryTransport.Host = artifacts.Hosts[omSendPort.SecondaryTransport.SendHandler.Host.Id()];
             }
 
             if (omSendPort.InboundTransforms != null)
