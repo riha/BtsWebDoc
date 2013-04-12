@@ -44,14 +44,7 @@ namespace btswebdoc.CmdClient.ModelTransformers
 
             foreach (var port in orchestration.Ports)
             {
-                var p =
-                    omOrchestration.Ports.Cast<Microsoft.BizTalk.ExplorerOM.OrchestrationPort>().Where(
-                        o => o.Name == port.Name).SingleOrDefault();
-                Log.Debug("Jugge omport is null:" + (p == null));
-                if(p!=null)
-                    Log.Debug("Jugge" + p.Name);
-
-                OrchestrationPortModelTransformer.SetReferences(port, artifacts, p);
+                OrchestrationPortModelTransformer.SetReferences(port, artifacts, omOrchestration.Ports.Cast<Microsoft.BizTalk.ExplorerOM.OrchestrationPort>().Where(o => o.Name == port.Name).SingleOrDefault());
             }
         }
     }
