@@ -17,7 +17,6 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -28,6 +27,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -129,6 +129,15 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\Open-Sans-700italic\LICENSE.txt" />
+    <Content Include="Content\fonts\Open-Sans-700italic\Open-Sans-700italic.svg" />
+    <Content Include="Content\fonts\Open-Sans-700\LICENSE.txt" />
+    <Content Include="Content\fonts\Open-Sans-700\Open-Sans-700.svg" />
+    <Content Include="Content\fonts\Open-Sans-italic\LICENSE.txt" />
+    <Content Include="Content\fonts\Open-Sans-italic\Open-Sans-italic.svg" />
+    <Content Include="Content\fonts\Open-Sans-regular\LICENSE.txt" />
+    <Content Include="Content\fonts\Open-Sans-regular\Open-Sans-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -139,6 +148,26 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\Open-Sans-700italic\Open-Sans-700italic.eot" />
+    <Content Include="Content\fonts\Open-Sans-700italic\Open-Sans-700italic.ttf" />
+    <Content Include="Content\fonts\Open-Sans-700italic\Open-Sans-700italic.woff" />
+    <Content Include="Content\fonts\Open-Sans-700italic\Open-Sans-700italic.woff2" />
+    <Content Include="Content\fonts\Open-Sans-700\Open-Sans-700.eot" />
+    <Content Include="Content\fonts\Open-Sans-700\Open-Sans-700.ttf" />
+    <Content Include="Content\fonts\Open-Sans-700\Open-Sans-700.woff" />
+    <Content Include="Content\fonts\Open-Sans-700\Open-Sans-700.woff2" />
+    <Content Include="Content\fonts\Open-Sans-italic\Open-Sans-italic.eot" />
+    <Content Include="Content\fonts\Open-Sans-italic\Open-Sans-italic.ttf" />
+    <Content Include="Content\fonts\Open-Sans-italic\Open-Sans-italic.woff" />
+    <Content Include="Content\fonts\Open-Sans-italic\Open-Sans-italic.woff2" />
+    <Content Include="Content\fonts\Open-Sans-regular\Open-Sans-regular.eot" />
+    <Content Include="Content\fonts\Open-Sans-regular\Open-Sans-regular.ttf" />
+    <Content Include="Content\fonts\Open-Sans-regular\Open-Sans-regular.woff" />
+    <Content Include="Content\fonts\Open-Sans-regular\Open-Sans-regular.woff2" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -254,5 +283,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
 </Project>
