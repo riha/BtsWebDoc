@@ -24,14 +24,14 @@ namespace btswebdoc.Web.Extensions
         {
             switch (trackingType)
             {
-                case TrackingTypes.AfterReceivePipeline: return "Request messages after port processing";
-                case TrackingTypes.AfterSendPipeline: return "Request messages after port processing";
-                case TrackingTypes.BeforeReceivePipeline: return "Request messages before port processing";
-                case TrackingTypes.BeforeSendPipeline: return "Request messages before port processing";
-                case TrackingTypes.TrackPropertiesAfterReceivePipeline: return "Request messages after port processing";
-                case TrackingTypes.TrackPropertiesAfterSendPipeline: return "Request messages after port processing";
-                case TrackingTypes.TrackPropertiesBeforeReceivePipeline: return "Request messages before port processing";
-                case TrackingTypes.TrackPropertiesBeforeSendPipeline: return "Request messages before port processing";
+                case TrackingTypes.AfterReceivePipeline: return "Request message bodies after port processing";
+                case TrackingTypes.AfterSendPipeline: return "Request message bodies after port processing";
+                case TrackingTypes.BeforeReceivePipeline: return "Request message bodies before port processing";
+                case TrackingTypes.BeforeSendPipeline: return "Request message bodies before port processing";
+                case TrackingTypes.TrackPropertiesAfterReceivePipeline: return "Request message properties after port processing";
+                case TrackingTypes.TrackPropertiesAfterSendPipeline: return "Request message properties after port processing";
+                case TrackingTypes.TrackPropertiesBeforeReceivePipeline: return "Request message properties before port processing";
+                case TrackingTypes.TrackPropertiesBeforeSendPipeline: return "Request message properties before port processing";
                 default: return string.Empty;
             }
         }
