@@ -2,6 +2,8 @@
 
 BizTalk Web Documenter automates the creation of technical documentation for BizTalk based solutions by extracting configuration data and visualize this data on a web site.
 
+More information on how to get started, download and simple demo can be found over at http://www.btswebdoc.com
+
 ## License ##
 Licensed under the MIT License
 
